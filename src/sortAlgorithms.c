@@ -14,7 +14,26 @@ void merge(int vetor[], int inicio, int meio, int fim, int esq[], int dir[]);
 void printVetor(int v[], int tamanho);
 void printArrayInteval(int v[], int start, int end);
 
+void insertionSort(int array[], int length)
+{
+    int n = 0;
+    int j = 0;
+    int temp = 0;
+    int c = 0;
+    for (int i = 1; i < length; i++)
+    {          
+        n = array[i];
+        j = i - 1;
+        while (array[j] > n)
+        {
+            temp = array[j];
+            array[j] = n;
+            array[j + 1] = temp;
+            j--;
+        }     
 
+    }   
+}
 
 void quickSort(int array[], int start, int end)
 {
@@ -187,11 +206,13 @@ int organized(int vetor[], int tamanho)
 
 int main()
 {
-    int size = 50000000;
-    //int size = 10;
+    //int size = 10000000;
+      int size = 300000;
     int *vetor1 = (int *)malloc((size) * sizeof(int));
     int *vetor2 = (int *)malloc((size) * sizeof(int));
+    int *vetor3 = (int *)malloc((size) * sizeof(int));
 
+    printf("gerando\n");
     srand((unsigned int)clock());
     int randomNum = 0;
     for (int i = 0; i < size; i++)
@@ -199,8 +220,9 @@ int main()
         randomNum = rand();
         vetor1[i] = randomNum;
         vetor2[i] = randomNum; 
+        vetor3[i] = randomNum; 
     }
-    printf("gerando\n");
+    
     //printVetor(vetor1,size);
 
     clock_t start, end;
@@ -236,6 +258,22 @@ int main()
     //printVetor(vetor2,size);
     printf("verificando... ");
     organized(vetor2, size);
+
+
+
+
+    printf("\nInsertionSort\n");
+
+    start = clock();
+    insertionSort(vetor3, size);
+    end = clock();
+
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("tempo(s)=%f\n", intevalo);
+
+    //printVetor(vetor3,size);
+    printf("verificando... ");
+    organized(vetor3, size);
 
 
 
