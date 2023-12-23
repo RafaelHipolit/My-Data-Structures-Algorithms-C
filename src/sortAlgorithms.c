@@ -207,7 +207,7 @@ int organized(int vetor[], int tamanho)
 int main()
 {
     //int size = 10000000;
-      int size = 300000;
+      int size = 10000;
     int *vetor1 = (int *)malloc((size) * sizeof(int));
     int *vetor2 = (int *)malloc((size) * sizeof(int));
     int *vetor3 = (int *)malloc((size) * sizeof(int));
