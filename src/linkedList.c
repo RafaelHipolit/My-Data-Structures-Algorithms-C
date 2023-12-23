@@ -42,6 +42,7 @@ void addEnd(linkedList_t* list, int v){
     }else
     {
         list->end->next = e;
+        list->end = e;
     }
     list->size++;
 }
