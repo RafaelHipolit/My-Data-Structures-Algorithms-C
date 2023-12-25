@@ -32,7 +32,7 @@ linkedList_t* newLinkedList(){
     return list;
 }
 
-void listAddEnd(linkedList_t* list, int v){
+void listAddEnd(linkedList_t* list, int v){ //push a new value
     nodeList_t* e = (nodeList_t*) malloc(sizeof(nodeList_t));
     e->value = v;
     e->next= NULL;
@@ -48,7 +48,7 @@ void listAddEnd(linkedList_t* list, int v){
     list->size++;
 }
 
-int listRemoveEnd(linkedList_t* list){
+int listRemoveEnd(linkedList_t* list){ //pop the last value
     if (list->size == 0)
     {
         return -1; //erro
@@ -77,14 +77,153 @@ int listRemoveEnd(linkedList_t* list){
     }
 }
 
+void listAddBegin(linkedList_t* list, int v){
+    nodeList_t* node = (nodeList_t*) malloc(sizeof(nodeList_t));
+    node->value = v;
+    if (list->size == 0)
+    {
+        node->next= NULL;
+        list->head = node;
+        list->end = node;
+    }else
+    {
+        node->next = list->head;
+        list->head = node;
+    }
+    list->size++;
+}
+
+int listRemoveBegin(linkedList_t* list){
+    if (list->size == 0)
+    {
+        return -1; //erro
+    }else if (list->size == 1)
+    {
+        int v = list->head->value;
+        free(list->head);
+        list->end = NULL;
+        list->head = NULL;
+        list->size--;
+        return v;
+    }else
+    { 
+        int v = list->head->value;
+        nodeList_t* newHead = list->head->next;
+        free(list->head);
+        list->head = newHead;
+        list->size--;
+        return v;
+    }
+}
+
+void listAddAtPosition(linkedList_t* list, int value, int pos) {
+    if (0 <= pos && pos < list->size){
+        if (pos == 0)
+        {
+            listAddBegin(list, value);
+        }else
+        {
+            nodeList_t* node = (nodeList_t*) malloc(sizeof(nodeList_t));
+            node->value = value;
+
+            nodeList_t* prevNode = list->head;
+            for (int i = 0; i < pos - 1; i++)
+            {
+                prevNode = prevNode->next;
+            }
+            nodeList_t* nextNode = prevNode->next;
+            
+            prevNode->next = node;
+            node->next = nextNode;
+            list->size++;
+        }
+    }
+}
+
+int listRemoveAtPosition(linkedList_t* list, int pos){
+    if (list->size == 0)
+    {
+        return -1; //erro
+    }
+    if (0 <= pos && pos < list->size){
+        if (pos == 0)
+        {
+            return listRemoveBegin(list);
+        }else if (pos == list->size - 1)
+        {
+            return listRemoveEnd(list);
+        }else
+        {
+            nodeList_t* prevNode = list->head;
+            for (int i = 0; i < pos - 1; i++)
+            {
+                prevNode = prevNode->next;
+            }
+            nodeList_t* nextNode = prevNode->next->next;
+            
+            int v = prevNode->next->value;
+            free(prevNode->next);
+            prevNode->next = nextNode;
+            list->size--;
+            return v;
+        }
+    }else
+    {
+        return -1; //erro
+    }
+    
+}
+
+int listGet(linkedList_t* list, int pos){ // return the value at position pos   
+    if (0 <= pos && pos < list->size)
+    {
+        nodeList_t* node = list->head;
+        for (int i = 0; i < pos; i++)
+        {
+            node = node->next;
+        }
+        
+        return node->value;
+    }
+
+    return -1; //erro
+}
+
+void listSet(linkedList_t* list, int newValue, int pos){ // set the value at position pos   
+    if (0 <= pos && pos < list->size)
+    {
+        nodeList_t* node = list->head;
+        for (int i = 0; i < pos; i++)
+        {
+            node = node->next;
+        }
+        
+        node->value = newValue;
+    }
+}
+
 void ListPrint(linkedList_t* list){
+    printf("Linked List with %d values\n", list->size);
     nodeList_t* e = list->head;
     for (int i = 0; i < list->size; i++)
     {
-        printf("%d\n",e->value);
+        printf("list[%d] = %d\n",i,e->value);
         e = e->next;
     }
     
 }
+
+int* listToArray(linkedList_t* list){
+    int *arr = (int *)malloc((list->size) * sizeof(int));
+    nodeList_t* node = list->head;
+    for (int i = 0; i < list->size; i++)
+    {
+        arr[i] = node->value;
+        node = node->next;
+    }
+    return arr;
+}
+
+
 
 #endif
