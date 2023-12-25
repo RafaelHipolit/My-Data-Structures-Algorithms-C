@@ -6,16 +6,23 @@ int main(){
     printf("Hello world!\n");
 
     linkedList_t* list = newLinkedList();
-    addEnd(list, 5);
-    addEnd(list, 10);
-    addEnd(list, 2);
-    addEnd(list, 22);
-    addEnd(list, 1);
-    addEnd(list, 8);
-    //printf("%d\n",list->size);
+    listAddEnd(list, 5);
+    listAddEnd(list, 10);
+    listAddEnd(list, 2);
+    ListPrint(list);
 
-    printList(list);
-    
+    printf("remove %d\n", listRemoveEnd(list));
+    ListPrint(list);
+
+    printf("remove %d\n", listRemoveEnd(list));
+    ListPrint(list);
+
+    printf("remove %d\n", listRemoveEnd(list));
+    ListPrint(list);
+
+    printf("remove %d\n", listRemoveEnd(list));
+    ListPrint(list);
+    //printf("%d\n",list->size);
 
     return 0;
 }

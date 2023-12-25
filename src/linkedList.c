@@ -4,24 +4,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct element
+typedef struct nodeList
 {
     int value;
-    struct element* next;
-}element_t;
+    struct nodeList* next;
+}nodeList_t;
 
 
 typedef struct linkedList
 {
-    element_t* head;
-    element_t* end;
+    nodeList_t* head;
+    nodeList_t* end;
     int size;
 }linkedList_t;
 
 
 linkedList_t* newLinkedList();
-void addEnd(linkedList_t* list, int value);
-void printList(linkedList_t* list);
+void listAddEnd(linkedList_t* list, int value);
+int listRemoveEnd(linkedList_t* list);
+void ListPrint(linkedList_t* list);
 
 linkedList_t* newLinkedList(){
     linkedList_t* list = (linkedList_t*) malloc(sizeof(linkedList_t));
@@ -31,8 +32,8 @@ linkedList_t* newLinkedList(){
     return list;
 }
 
-void addEnd(linkedList_t* list, int v){
-    element_t* e = (element_t*) malloc(sizeof(element_t));
+void listAddEnd(linkedList_t* list, int v){
+    nodeList_t* e = (nodeList_t*) malloc(sizeof(nodeList_t));
     e->value = v;
     e->next= NULL;
     if (list->size == 0)
@@ -47,8 +48,37 @@ void addEnd(linkedList_t* list, int v){
     list->size++;
 }
 
-void printList(linkedList_t* list){
-    element_t* e = list->head;
+int listRemoveEnd(linkedList_t* list){
+    if (list->size == 0)
+    {
+        return -1; //erro
+    }else if (list->size == 1)
+    {
+        int v = list->end->value;
+        free(list->end);
+        list->end = NULL;
+        list->head = NULL;
+        list->size--;
+        return v;
+    }else
+    {  
+        nodeList_t* prevEnd = list->head;
+        while (prevEnd->next->next != NULL)
+        {
+            prevEnd = prevEnd->next;
+        }
+        
+        int v = list->end->value;
+        free(list->end);
+        list->end = prevEnd;
+        prevEnd->next = NULL;
+        list->size--;
+        return v;
+    }
+}
+
+void ListPrint(linkedList_t* list){
+    nodeList_t* e = list->head;
     for (int i = 0; i < list->size; i++)
     {
         printf("%d\n",e->value);
