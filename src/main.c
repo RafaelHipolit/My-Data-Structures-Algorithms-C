@@ -1,10 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "linkedList.c"
-#include "linkedList.c"
-#include "sortAlgorithms.c"
-#include "sortAlgorithms.c"
+#include "../include/linkedList.h"
+#include "../include/sortAlgorithms.h"
 
 
 void testList(){
@@ -129,7 +127,9 @@ int main(){
     int a[16] = {165,651,56,1,51,6,21,218,5,15,1,351,21,5,31,5};
     linkedList_t* l = newLinkedListFromArray(a,16);
     //ListPrint(l);
+		printf("Iniciando BLA BLA\n");
     listSort(l);//PQ ISSO NAO FUNCIONA???????????????
+		printf("Iniciando BLA BLA BLA\n");
     ListPrint(l);
     return 0;
 }

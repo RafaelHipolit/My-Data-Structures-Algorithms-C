@@ -1,29 +1,7 @@
-#ifndef LINKED_LIST
-#define LINKED_LIST
-
+#include "../include/linkedList.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "sortAlgorithms.c"
-
-typedef struct nodeList
-{
-    int value;
-    struct nodeList* next;
-}nodeList_t;
-
-
-typedef struct linkedList
-{
-    nodeList_t* head;
-    nodeList_t* end;
-    int size;
-}linkedList_t;
-
-
-linkedList_t* newLinkedList();
-void listAddEnd(linkedList_t* list, int value);
-int listRemoveEnd(linkedList_t* list);
-void ListPrint(linkedList_t* list);
+#include "../include/sortAlgorithms.h"
 
 linkedList_t* newLinkedList(){
     linkedList_t* list = (linkedList_t*) malloc(sizeof(linkedList_t));
@@ -259,5 +237,3 @@ void listSort(linkedList_t* list){
     ListPrint(list);
     free(arr);
 }
-
-#endif
