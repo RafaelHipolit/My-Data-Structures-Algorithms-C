@@ -121,13 +121,13 @@ int main(){
     listAddEnd(list, 7);
     listAddEnd(list, 14242);
     listAddEnd(list, 2);
-    listSort(&list);
     ListPrint(list);
+    listSort(&list);
 
     int a[16] = {165,651,56,1,51,6,21,218,5,15,1,351,21,5,31,5};
     linkedList_t* l = newLinkedListFromArray(a,16);
     //ListPrint(l);
-    listSort(&l);//PQ ISSO NAO FUNCIONA???????????????
     ListPrint(l);
+    listSort(&l);//PQ ISSO NAO FUNCIONA???????????????
     return 0;
 }
