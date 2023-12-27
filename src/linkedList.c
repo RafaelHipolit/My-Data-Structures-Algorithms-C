@@ -1,7 +1,7 @@
-#include "../include/linkedList.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/sortAlgorithms.h"
+#include "../include/linkedList.h"
 
 linkedList_t* newLinkedList(){
     linkedList_t* list = (linkedList_t*) malloc(sizeof(linkedList_t));
@@ -224,7 +224,7 @@ void listDelete(linkedList_t* list){
     free(list);
 }
 
-void listSort(linkedList_t** list){
+void listSort(linkedList_t** list){ //ENTENDER O QUE TA ACONTECENDO AQUI
     int* arr = listToArray(*list);
     int size = list[0]->size;
     quickSort(arr, 0, size-1);
@@ -232,6 +232,8 @@ void listSort(linkedList_t** list){
     listDelete(*list);   
     *list = newLinkedListFromArray(arr, size);
 
-    ListPrint(*list);
+    //ListPrint(*list);
     free(arr);
 }
+
+//TEM QUE DOCUMENTAR AS FUNCOES

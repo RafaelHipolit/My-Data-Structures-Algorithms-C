@@ -3,6 +3,7 @@
 #include <time.h>
 #include "../include/linkedList.h"
 #include "../include/sortAlgorithms.h"
+#include "../include/stack.h"
 
 
 void testList(){
@@ -111,9 +112,7 @@ void testSort(){
     organized(vetor3, size);
 }
 
-int main(){
-    printf("Hello world!\n");
-
+void testListSort(){
     linkedList_t* list = newLinkedList();
     listAddEnd(list, 10);
     listAddEnd(list, 1);
@@ -121,13 +120,30 @@ int main(){
     listAddEnd(list, 7);
     listAddEnd(list, 14242);
     listAddEnd(list, 2);
-    ListPrint(list);
     listSort(&list);
+    ListPrint(list);
 
     int a[16] = {165,651,56,1,51,6,21,218,5,15,1,351,21,5,31,5};
     linkedList_t* l = newLinkedListFromArray(a,16);
-    //ListPrint(l);
+    listSort(&l);
     ListPrint(l);
-    listSort(&l);//PQ ISSO NAO FUNCIONA???????????????
+}
+
+int main(){
+    printf("Hello world!\n");
+
+    stack_t* s = newStack();
+    stackPush(s,1);
+    stackPush(s,1);
+    stackPush(s,2);
+    stackPush(s,3);
+    stackPush(s,5);
+    stackPush(s,2);
+    stackPrint(s);
+
+    printf("pop %d\n",stackPop(s)); 
+    printf("pop %d\n",stackPop(s)); 
+    stackPrint(s);
+    
     return 0;
 }

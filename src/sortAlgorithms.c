@@ -1,7 +1,7 @@
-#include "../include/sortAlgorithms.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "../include/sortAlgorithms.h"
 
 void insertionSort(int array[], int length)
 {
