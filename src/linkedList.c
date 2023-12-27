@@ -1,29 +1,7 @@
-#ifndef LINKED_LIST
-#define LINKED_LIST
-
+#include "../include/linkedList.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "sortAlgorithms.c"
-
-typedef struct nodeList
-{
-    int value;
-    struct nodeList* next;
-}nodeList_t;
-
-
-typedef struct linkedList
-{
-    nodeList_t* head;
-    nodeList_t* end;
-    int size;
-}linkedList_t;
-
-
-linkedList_t* newLinkedList();
-void listAddEnd(linkedList_t* list, int value);
-int listRemoveEnd(linkedList_t* list);
-void ListPrint(linkedList_t* list);
+#include "../include/sortAlgorithms.h"
 
 linkedList_t* newLinkedList(){
     linkedList_t* list = (linkedList_t*) malloc(sizeof(linkedList_t));
@@ -246,18 +224,14 @@ void listDelete(linkedList_t* list){
     free(list);
 }
 
-void listSort(linkedList_t* list){
-    int* arr = listToArray(list);
-    int size = list->size;
+void listSort(linkedList_t** list){
+    int* arr = listToArray(*list);
+    int size = list[0]->size;
     quickSort(arr, 0, size-1);
 
-    listDelete(list);   
-    list = newLinkedListFromArray(arr, size);   // por algum motivo tenho que apagar a coisa que o ponteiro ta apontando pra consegir modificar o conteudo
-                                                // nao sei se to fazendo esse ponteiro apontar pra um outro endereco
-                                                // ou se to mudando o conteudo do endereco que ele ta apontando 
-                                                // acho que a 2 opcao, mas ainda nao entendo o pq tenho que apagar o conteudo que ele aponta pra conseguir muda o conteudo
-    ListPrint(list);
+    listDelete(*list);   
+    *list = newLinkedListFromArray(arr, size);
+
+    ListPrint(*list);
     free(arr);
 }
-
-#endif
