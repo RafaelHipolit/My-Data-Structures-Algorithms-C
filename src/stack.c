@@ -38,6 +38,7 @@ int stackPop(stack_t* s){
 }
 
 void stackPrint(stack_t* s){
+    printf("Stack with %d values\n", s->size);
     nodeStack_t* node = s->end;
     for (int i = s->size - 1; i >= 0; i--)
     {

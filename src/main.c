@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../include/linkedList.h"
-#include "../include/sortAlgorithms.h"
 #include "../include/stack.h"
+#include "../include/queue.h"
+#include "../include/sortAlgorithms.h"
 
 
 void testList(){
@@ -129,7 +130,7 @@ void testListSort(){
     ListPrint(l);
 }
 
-int main(){
+void testStack(){
     printf("Hello world!\n");
 
     stack_t* s = newStack();
@@ -143,7 +144,43 @@ int main(){
 
     printf("pop %d\n",stackPop(s)); 
     printf("pop %d\n",stackPop(s)); 
+    printf("pop %d\n",stackPop(s)); 
+    printf("pop %d\n",stackPop(s)); 
+    printf("pop %d\n",stackPop(s)); 
+    printf("pop %d\n",stackPop(s)); 
+    printf("pop %d\n",stackPop(s)); 
+    printf("pop %d\n",stackPop(s)); 
     stackPrint(s);
+
+    stackPush(s,2);
+    stackPrint(s);
+}
+
+int main(){
     
+    queue_t* q = newQueue();
+    queueEnqueue(q, 1);
+    queueEnqueue(q, 453);
+    queueEnqueue(q, 345);
+    queueEnqueue(q, 43);
+    queueEnqueue(q, 4);
+    queueEnqueue(q, -9242842);
+    queuePrint(q);
+
+    printf("dequeue %d\n",queueDequeue(q));
+    printf("dequeue %d\n",queueDequeue(q));
+    printf("dequeue %d\n",queueDequeue(q));
+    printf("dequeue %d\n",queueDequeue(q));
+    printf("dequeue %d\n",queueDequeue(q));
+    printf("dequeue %d\n",queueDequeue(q));
+    printf("dequeue %d\n",queueDequeue(q));
+    printf("dequeue %d\n",queueDequeue(q));
+
+    queuePrint(q); 
+
+    queueEnqueue(q, -9242842);
+    queuePrint(q);
+
+
     return 0;
 }
