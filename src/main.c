@@ -5,6 +5,8 @@
 #include "../include/stack.h"
 #include "../include/queue.h"
 #include "../include/sortAlgorithms.h"
+#include "../include/doublyLinkedList.h"
+#include "../include/iteratorDoublyLinkedList.h"
 
 
 void testList(){
@@ -156,8 +158,7 @@ void testStack(){
     stackPrint(s);
 }
 
-int main(){
-    
+void testQueue(){
     queue_t* q = newQueue();
     queueEnqueue(q, 1);
     queueEnqueue(q, 453);
@@ -180,7 +181,13 @@ int main(){
 
     queueEnqueue(q, -9242842);
     queuePrint(q);
+}
 
+int main(){
+    
+    //TESTAR   
+    doublyLinkedList_t* list = newDoublyLinkedList();
+    iteratorDoublyLinkedList_t* i = newIteratorDoublyLinkedList(list);
 
     return 0;
 }
