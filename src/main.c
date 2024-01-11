@@ -7,6 +7,7 @@
 #include "../include/sortAlgorithms.h"
 #include "../include/doublyLinkedList.h"
 #include "../include/iteratorDoublyLinkedList.h"
+#include "../include/stringList.h"
 
 
 void testList(){
@@ -186,8 +187,16 @@ void testQueue(){
 int main(){
     
     //TESTAR   
-    doublyLinkedList_t* list = newDoublyLinkedList();
-    iteratorDoublyLinkedList_t* i = newIteratorDoublyLinkedList(list);
+    //doublyLinkedList_t* list = newDoublyLinkedList();
+    //iteratorDoublyLinkedList_t* i = newIteratorDoublyLinkedList(list);
+
+
+
+
+    stringList_t* s = newString("Hello World!");
+    stringPrint(s);
+    char* s2 = stringToCharPtr(s); 
+    printf("%s\n", s2);
 
     return 0;
 }
