@@ -193,10 +193,12 @@ int main(){
 
 
 
-    stringList_t* s = newString("Hello World!");
-    stringPrint(s);
-    char* s2 = stringToCharPtr(s); 
-    printf("%s\n", s2);
+    stringList_t* s = newString("");
+    stringPrint(stringReverse(s));
+    
+    //stringPrint(s);
+    //char* s2 = stringToCharPtr(s); 
+    //printf("%s\n", s2);
 
     return 0;
 }

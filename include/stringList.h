@@ -16,5 +16,7 @@ typedef struct stringList
 stringList_t* newString(char* strPtr);
 void stringPrint(stringList_t* string);
 char* stringToCharPtr(stringList_t* string);
+stringList_t* stringGetInterval(stringList_t* string, int positionStart, int positionEnd);
+stringList_t *stringReverse(stringList_t *string);
 
 
