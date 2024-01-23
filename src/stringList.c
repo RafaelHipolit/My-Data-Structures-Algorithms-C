@@ -112,59 +112,46 @@ void stringCopy(stringList_t *stringCopy, stringList_t *stringPaste)
     free(copy);
 }
 
-stringList_t **stringSplit(stringList_t *string, char character, int *arrayLength)
-{
+stringList_t **stringSplit(stringList_t *string, char character, int *arrayLength){
     int numString = 0;
     nodeStringList_t *node = string->head;
+    int achou = 0;
     for (int i = 0; i < string->length; i++)
     {
-        if (node->value == character)
+        if (node->value != character && achou == 0)
         {
+            achou = 1;
             numString++;
+        }
+        if (achou == 1 && node->value == character)
+        {
+            achou = 0;
         }
         node = node->next;
     }
-    if (string->end->value != character)
-    {
-        numString++;
-    }
 
-    int skipFirst = 0;
-    if (string->head->value == character)
-    {
-        numString--;
-        skipFirst = 1;
-    }
-    
     stringList_t **stringArray = (stringList_t **)malloc((numString) * sizeof(stringList_t *));
     node = string->head;
     int lastIndex = 0;
+    achou = 0;
     for (int i = 0; i < string->length; i++)
     {
-        if (node->value == character)
-        {   
-            if (skipFirst)
-            {
-                skipFirst = 0;
-            }else
-            {
-                *stringArray = stringGetInterval(string, lastIndex, i-1);
-                //stringPrint(*stringArray);
-                lastIndex = i + 1;
-                stringArray++;
-            }
-         
+        if (node->value != character && achou == 0)
+        {
+            achou = 1;
+            lastIndex = i;
+        }
+        if (achou == 1 && node->value == character)
+        {
+            achou = 0;
+            *stringArray = stringGetInterval(string, lastIndex, i-1);
+            stringArray++;
         }
         node = node->next;
     }
-    if (string->end->value != character)
-    {
-        *stringArray = stringGetInterval(string, lastIndex, string->length-1); //atualmete stringArray aponta pro ultimo elemteto do array
-        //stringPrint(*stringArray); 
-    }
 
     *arrayLength = numString;
-    return stringArray - numString + 1;  // retorna o endereco do primeiro elemento      
+    return stringArray - numString;  // retorna o endereco do primeiro elemento do array
 }
 
 void stringSet(stringList_t *string, char *charPtr)

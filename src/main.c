@@ -283,13 +283,13 @@ void testSortTime(){
 }
 
 void testSplit(){
-    stringList_t* s = newString("anata-wa-baka-desua");
+    stringList_t* s = newString("---a----bbbb----c---------");
     int n = 0;
-    stringList_t** arr = stringSplit(s,'a',&n);
+    stringList_t** arr = stringSplit(s,'-',&n);
+    printf("n = %d\n",n);
     for (int i = 0; i < n; i++)
     {
         stringPrint(arr[i]);
-        //segmentation fault pra resolver
     }
 }
 
@@ -304,6 +304,10 @@ void testStringCopy(){
 }
 
 int main(){
+
+    testSplit();
+
+    //add delete queue and stack and to array
     
     return 0;
 }
