@@ -86,6 +86,23 @@ void stringConcCharPtr(stringList_t *string, char *charPtr)
 
 int stringComparation(stringList_t *string1, stringList_t *string2)
 {
+    if (string1->length != string2->length)
+    {
+        return 0;
+    }
+    nodeStringList_t* node1 = string1->head;
+    nodeStringList_t* node2 = string2->head;
+    for (int i = 0; i < string1->length; i++)
+    {
+        if (node1->value != node2->value)
+        {
+            return 0;
+        }
+        node1 = node1->next;
+        node2 = node2->next;
+    }
+    
+    return 1;
 }
 
 void stringCopy(stringList_t *stringCopy, stringList_t *stringPaste)

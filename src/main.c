@@ -293,6 +293,10 @@ void testSplit(){
     }
 }
 
+void testStringComp(){
+    printf("%d\n", stringComparation(newString(""),newString("")));
+}
+
 int main(){
     
     return 0;
