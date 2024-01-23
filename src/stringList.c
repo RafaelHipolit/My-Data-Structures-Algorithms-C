@@ -112,18 +112,18 @@ void stringCopy(stringList_t *stringCopy, stringList_t *stringPaste)
     free(copy);
 }
 
-stringList_t **stringSplit(stringList_t *string, char character, int *arrayLength){
+stringList_t **stringSplit(stringList_t *string, char separator, int *arrayLength){
     int numString = 0;
     nodeStringList_t *node = string->head;
     int achou = 0;
     for (int i = 0; i < string->length; i++)
     {
-        if (node->value != character && achou == 0)
+        if (node->value != separator && achou == 0)
         {
             achou = 1;
             numString++;
         }
-        if (achou == 1 && node->value == character)
+        if (achou == 1 && node->value == separator)
         {
             achou = 0;
         }
@@ -136,12 +136,12 @@ stringList_t **stringSplit(stringList_t *string, char character, int *arrayLengt
     achou = 0;
     for (int i = 0; i < string->length; i++)
     {
-        if (node->value != character && achou == 0)
+        if (node->value != separator && achou == 0)
         {
             achou = 1;
             lastIndex = i;
         }
-        if (achou == 1 && node->value == character)
+        if (achou == 1 && node->value == separator)
         {
             achou = 0;
             *stringArray = stringGetInterval(string, lastIndex, i-1);
@@ -195,9 +195,9 @@ void stringSet(stringList_t *string, char *charPtr)
     */
 }
 
-stringList_t *stringGetInterval(stringList_t *string, int positionStart, int positionEnd)
+stringList_t *stringGetInterval(stringList_t *string, int indexStart, int indexEnd)
 {
-    if ((positionStart > positionEnd) || (positionStart < 0) || (positionStart < 0) || (positionStart >= string->length) || (positionEnd >= string->length))
+    if ((indexStart > indexEnd) || (indexStart < 0) || (indexStart < 0) || (indexStart >= string->length) || (indexEnd >= string->length))
     {
         return NULL;
     }
@@ -209,9 +209,9 @@ stringList_t *stringGetInterval(stringList_t *string, int positionStart, int pos
 
     nodeStringList_t *node = string->head;
     nodeStringList_t *nodeNewString;
-    for (int i = 0; i <= positionEnd; i++)
+    for (int i = 0; i <= indexEnd; i++)
     {
-        if (i >= positionStart)
+        if (i >= indexStart)
         {
             nodeNewString = (nodeStringList_t *)malloc(sizeof(nodeStringList_t));
             nodeNewString->value = node->value;
