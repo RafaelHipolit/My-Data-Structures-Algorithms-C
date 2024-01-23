@@ -224,16 +224,90 @@ void listDelete(linkedList_t* list){
     free(list);
 }
 
-void listSort(linkedList_t** list){ //ENTENDER O QUE TA ACONTECENDO AQUI
-    int* arr = listToArray(*list);
-    int size = list[0]->size;
+/*
+// FUNCTION sortList() - funcao para organizar a lista
+
+// funcao antiga com erro simples: variavel criada nos paramentros da funcao nao altera a variavel que foi passa na chamada da funcao 
+void listSortERRO(linkedList_t* list){
+    int* arr = listToArray(list);
+    int size = list->size;
     quickSort(arr, 0, size-1);
 
-    listDelete(*list);   
-    *list = newLinkedListFromArray(arr, size);
+    listDelete(list);   
+    list = newLinkedListFromArray(arr, size);
+    printf("Endereco da nova lista ligada = %p\n", list);
+
+    free(arr);
+}
+// listDelete(list); desaloca a lista ligada desorganizada que list estava apontando. Assim list agora aponta pra um endereco que nao tem mais uma lista ligada
+// list = newLinkedListFromArray(arr, size); aloca uma nova lista ligada organizada num outro endereco e faz list apontar pro endereco da nova lista
+// tudo correto, porem essa alteracao eh somente para a var list dessa funcao, enquanto a var que foi passada na chamada da funcao la na main vai continua apontando pro endereco da antiga lista desorganizada que nem existe mais
+// por isso a var list dessa funcao funciona corretamente e a var la da main da segmentation fault
+// bizarramente as vezes nao dava erro pq o endereco na nova lista ligada organizada acabava "coincidentemente" sendo o mesmo da antiga lista ligada
+
+// Uma solucao eh receber por parametro o endereco da var la da main para altera seu conteudo dentro da funcao
+void listSort(linkedList_t** listPtr){ 
+    int* arr = listToArray(*listPtr);
+    int size = (*listPtr)->size;
+    quickSort(arr, 0, size-1);
+
+    listDelete(*listPtr);   
+    *listPtr = newLinkedListFromArray(arr, size);
+    printf("Endereco da nova lista ligada = %p\n", *listPtr);
 
     //ListPrint(*list);
     free(arr);
+}
+
+// Mas por fim vou preferir uma solucao mais extensa: nao alocar uma nova lista e sim alterar o conteudo da ja existente 
+*/
+
+void listSort(linkedList_t* list){
+    int* arr = listToArray(list);
+    int size = list->size;
+    quickSort(arr, 0, size-1);   
+    linkedList_t* listSorted = newLinkedListFromArray(arr, size);
+
+    listCopy(listSorted, list);
+    //printf("Endereco da nova lista ligada = %p\n", list);
+
+    listDelete(listSorted);
+    free(arr);
+}
+
+void listCopy(linkedList_t* listCopy, linkedList_t* listPaste){
+    nodeList_t* node = listPaste->head;
+    nodeList_t* nextNode;
+    for (int i = 0; i < listPaste->size; i++)
+    {
+        nextNode = node->next;
+        free(node);
+        node = nextNode;
+    }
+    listPaste->size = 0;
+    listPaste->head = NULL;
+    listPaste->end = NULL;
+
+    nodeList_t* nodeCopy = listCopy->head;
+    for (int i = 0; i < listCopy->size; i++)
+    {
+        node = (nodeList_t*) malloc(sizeof(nodeList_t));
+        node->value = nodeCopy->value;
+        node->next= NULL;
+        if (listPaste->size == 0)
+        {
+            listPaste->head = node;
+            listPaste->end = node;
+        }else
+        {
+            listPaste->end->next = node;
+            listPaste->end = node;
+        }
+        listPaste->size++;
+
+        nodeCopy = nodeCopy->next;
+    }
+    
 }
 
 //TEM QUE DOCUMENTAR AS FUNCOES

@@ -124,13 +124,42 @@ void testListSort(){
     listAddEnd(list, 7);
     listAddEnd(list, 14242);
     listAddEnd(list, 2);
-    listSort(&list);
+
+    printf("Endereco da var list da main antes de chama a funcao = %p\n", list);
+    listSort(list);
+    printf("Endereco da var list da main apos chama a funcao = %p\n", list);
     ListPrint(list);
 
     int a[16] = {165,651,56,1,51,6,21,218,5,15,1,351,21,5,31,5};
     linkedList_t* l = newLinkedListFromArray(a,16);
-    listSort(&l);
+
+    printf("Endereco da var list da main antes de chama a funcao = %p\n", l);
+    listSort(l);
+    printf("Endereco da var list da main apos chama a funcao = %p\n", l);
     ListPrint(l);
+}
+
+void testListCopy(){
+    linkedList_t* list = newLinkedList();
+    listAddEnd(list, 10);
+    listAddEnd(list, 1);
+    listAddEnd(list, 5);
+    listAddEnd(list, 7);
+    listAddEnd(list, 14242);
+    listAddEnd(list, 2);
+
+    int a[16] = {165,651,56,1,51,6,21,218,5,15,1,351,21,5,31,5};
+    linkedList_t* l = newLinkedListFromArray(a,16);
+
+    ListPrint(list);
+    listCopy(l,list);
+    ListPrint(list);
+}
+
+void testDoublyLinkedList(){
+    //TESTAR   
+    //doublyLinkedList_t* list = newDoublyLinkedList();
+    //iteratorDoublyLinkedList_t* i = newIteratorDoublyLinkedList(list);
 }
 
 void testStack(){
@@ -184,21 +213,88 @@ void testQueue(){
     queuePrint(q);
 }
 
+void testString(){
+    stringList_t* s1 = newString("abc");
+    stringList_t* s2 = newString("123");
+    
+    stringConcatenation(s1, s2);
+    stringPrint(s1);
+    stringPrint(s2);
+    stringDelete(s1);
+    stringDelete(s2);
+
+    stringList_t* s = newString("abc");
+    stringPrint(s);
+    stringSet(s, "oyasuminasai");
+    stringPrint(s);
+}
+
+void testLinkedListTime(){
+    double intevalo = 0;
+    clock_t start, end;
+    
+
+    start = clock();
+    linkedList_t* l = newLinkedList();
+    for (int i = 0; i < 99999; i++)
+    {
+        listAddEnd(l,i);
+    }
+    for (int i = 0; i < l->size; i++)
+    {
+        listSet(l,3,i);
+    }
+    listDelete(l);
+   
+    end = clock();
+
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("tempo(s)=%f\n", intevalo);
+}
+
+void testSortTime(){
+    int size = 99999999;
+    int *vetor1 = (int *)malloc((size) * sizeof(int));
+
+    printf("gerando\n");
+    srand((unsigned int)clock());
+    int randomNum = 0;
+    for (int i = 0; i < size; i++)
+    {
+        randomNum = rand();
+        vetor1[i] = randomNum;
+
+    }
+
+    printf("organizando...\n");
+    clock_t start, end;
+    double intevalo = 0;
+
+    start = clock();
+    quickSort(vetor1, 0, size - 1);
+    end = clock();
+
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("tempo(s)=%f\n", intevalo);
+
+    //printVetor(vetor1,size);
+    printf("verificando... ");
+    organized(vetor1, size);
+}
+
+void testSplit(){
+    stringList_t* s = newString("anata-wa-baka-desua");
+    int n = 0;
+    stringList_t** arr = stringSplit(s,'a',&n);
+    for (int i = 0; i < n; i++)
+    {
+        stringPrint(arr[i]);
+        //segmentation fault pra resolver
+    }
+}
+
 int main(){
     
-    //TESTAR   
-    //doublyLinkedList_t* list = newDoublyLinkedList();
-    //iteratorDoublyLinkedList_t* i = newIteratorDoublyLinkedList(list);
-
-
-
-
-    stringList_t* s = newString("");
-    stringPrint(stringReverse(s));
-    
-    //stringPrint(s);
-    //char* s2 = stringToCharPtr(s); 
-    //printf("%s\n", s2);
-
     return 0;
 }
+

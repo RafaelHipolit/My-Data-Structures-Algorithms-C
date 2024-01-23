@@ -3,6 +3,11 @@
 #include <time.h>
 #include "../include/sortAlgorithms.h"
 
+//metodos para apenas uso interno
+int partition(int array[], int start, int end);
+void mergeSortRecusao(int vetor[], int inicio, int fim, int esq[], int dir[]);
+void merge(int vetor[], int inicio, int meio, int fim, int esq[], int dir[]);
+
 void insertionSort(int array[], int length)
 {
     int n = 0;

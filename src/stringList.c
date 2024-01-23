@@ -53,13 +53,149 @@ char *stringToCharPtr(stringList_t *string)
     return charPtr - string->length; // retorna o endereco do primeiro elemento
 }
 
+void stringConcatenation(stringList_t *string1, stringList_t *string2)
+{ // concatenates the content of string2 into string1
+    nodeStringList_t *node1 = string1->end;
+    nodeStringList_t *node2 = string2->head;
+    for (int i = 0; i < string2->length; i++)
+    {
+        node1->next = (nodeStringList_t *)malloc(sizeof(nodeStringList_t));
+        node1 = node1->next;
+        node1->value = node2->value;
+        node1->next = NULL;
+        string1->length++;
+
+        node2 = node2->next;
+    }
+}
+
+void stringConcCharPtr(stringList_t *string, char *charPtr)
+{
+    nodeStringList_t *node1 = string->end;
+    while (*charPtr != '\0')
+    {
+        node1->next = (nodeStringList_t *)malloc(sizeof(nodeStringList_t));
+        node1 = node1->next;
+        node1->value = *charPtr;
+        node1->next = NULL;
+        string->length++;
+
+        charPtr++;
+    }
+}
+
+int stringComparation(stringList_t *string1, stringList_t *string2)
+{
+}
+
+void stringCopy(stringList_t *stringCopy, stringList_t *stringPaste)
+{
+}
+
+stringList_t **stringSplit(stringList_t *string, char character, int *arrayLength)
+{
+    int numString = 0;
+    nodeStringList_t *node = string->head;
+    for (int i = 0; i < string->length; i++)
+    {
+        if (node->value == character)
+        {
+            numString++;
+        }
+        node = node->next;
+    }
+    if (string->end->value != character)
+    {
+        numString++;
+    }
+
+    int skipFirst = 0;
+    if (string->head->value == character)
+    {
+        numString--;
+        skipFirst = 1;
+    }
+    
+    stringList_t **stringArray = (stringList_t **)malloc((numString) * sizeof(stringList_t *));
+    node = string->head;
+    int lastIndex = 0;
+    for (int i = 0; i < string->length; i++)
+    {
+        if (node->value == character)
+        {   
+            if (skipFirst)
+            {
+                skipFirst = 0;
+            }else
+            {
+                *stringArray = stringGetInterval(string, lastIndex, i-1);
+                //stringPrint(*stringArray);
+                lastIndex = i + 1;
+                stringArray++;
+            }
+         
+        }
+        node = node->next;
+    }
+    if (string->end->value != character)
+    {
+        *stringArray = stringGetInterval(string, lastIndex, string->length-1); //atualmete stringArray aponta pro ultimo elemteto do array
+        //stringPrint(*stringArray); 
+    }
+
+    *arrayLength = numString;
+    return stringArray - numString + 1;  // retorna o endereco do primeiro elemento      
+}
+
+void stringSet(stringList_t *string, char *charPtr)
+{ // pensar nome melhor
+    nodeStringList_t *node = string->head;
+    nodeStringList_t *nextNode;
+    for (int i = 0; i < string->length; i++)
+    {
+        nextNode = node->next;
+        free(node);
+        node = nextNode;
+    }
+    string->length = 0;
+
+    string->head = NULL;
+    string->end = NULL;
+
+    while (*charPtr != '\0')
+    {
+        node = (nodeStringList_t *)malloc(sizeof(nodeStringList_t));
+        node->value = *charPtr;
+        node->next = NULL;
+        if (string->length == 0)
+        {
+            string->head = node;
+            string->end = node;
+        }
+        else
+        {
+            string->end->next = node;
+            string->end = node;
+        }
+        string->length++;
+
+        charPtr++;
+    }
+
+    /*
+    //uma opcao um pouco menos eficiente
+    stringDelete(s);
+    s = newString(charPtr);
+    */
+}
+
 stringList_t *stringGetInterval(stringList_t *string, int positionStart, int positionEnd)
 {
-    if ((positionStart > positionEnd)||(positionStart < 0)||(positionStart < 0)||(positionStart >= string->length)||(positionEnd >= string->length))
+    if ((positionStart > positionEnd) || (positionStart < 0) || (positionStart < 0) || (positionStart >= string->length) || (positionEnd >= string->length))
     {
         return NULL;
     }
-    
+
     stringList_t *newString = (stringList_t *)malloc(sizeof(stringList_t));
     newString->head = NULL;
     newString->end = NULL;
@@ -93,8 +229,9 @@ stringList_t *stringGetInterval(stringList_t *string, int positionStart, int pos
     return newString;
 }
 
-stringList_t *stringReverse(stringList_t *string){
-    stack_t* stack = newStack();
+stringList_t *stringReverse(stringList_t *string)
+{
+    stack_t *stack = newStack();
     nodeStringList_t *node = string->head;
     for (int i = 0; i < string->length; i++)
     {
@@ -136,4 +273,17 @@ void stringPrint(stringList_t *string)
         node = node->next;
     }
     printf("\n");
+}
+
+void stringDelete(stringList_t *string)
+{
+    nodeStringList_t *node = string->head;
+    nodeStringList_t *nextNode;
+    for (int i = 0; i < string->length; i++)
+    {
+        nextNode = node->next;
+        free(node);
+        node = nextNode;
+    }
+    free(string);
 }

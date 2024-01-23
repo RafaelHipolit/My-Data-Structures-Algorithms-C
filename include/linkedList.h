@@ -27,4 +27,5 @@ void listSet(linkedList_t* list, int newValue, int pos);
 void ListPrint(linkedList_t* list);
 int* listToArray(linkedList_t* list);
 void listDelete(linkedList_t* list);
-void listSort(linkedList_t** list);
+void listSort(linkedList_t* list);
+void listCopy(linkedList_t* listCopy, linkedList_t* listPaste);
