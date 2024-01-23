@@ -23,6 +23,8 @@ void stringConcCharPtr(stringList_t* string, char* charPtr);
 
 int stringComparation(stringList_t *string1, stringList_t *string2);
 
+void stringCopy(stringList_t *stringCopy, stringList_t *stringPaste);
+
 stringList_t **stringSplit(stringList_t *string, char character, int *arrayLength);
 void stringSet(stringList_t* string, char* charPtr);
 stringList_t* stringGetInterval(stringList_t* string, int positionStart, int positionEnd);

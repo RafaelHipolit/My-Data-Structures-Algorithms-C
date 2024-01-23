@@ -106,7 +106,10 @@ int stringComparation(stringList_t *string1, stringList_t *string2)
 }
 
 void stringCopy(stringList_t *stringCopy, stringList_t *stringPaste)
-{
+{   
+    char* copy = stringToCharPtr(stringCopy);
+    stringSet(stringPaste, copy);
+    free(copy);
 }
 
 stringList_t **stringSplit(stringList_t *string, char character, int *arrayLength)
@@ -175,7 +178,6 @@ void stringSet(stringList_t *string, char *charPtr)
         node = nextNode;
     }
     string->length = 0;
-
     string->head = NULL;
     string->end = NULL;
 

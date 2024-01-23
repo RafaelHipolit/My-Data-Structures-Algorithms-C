@@ -297,6 +297,12 @@ void testStringComp(){
     printf("%d\n", stringComparation(newString(""),newString("")));
 }
 
+void testStringCopy(){
+    stringList_t* s = newString("abc");
+    stringCopy(newString("delta"),s);
+    stringPrint(s);
+}
+
 int main(){
     
     return 0;
