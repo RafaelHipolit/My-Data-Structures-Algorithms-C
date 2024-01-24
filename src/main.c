@@ -174,6 +174,12 @@ void testStack(){
     stackPush(s,2);
     stackPrint(s);
 
+    int* arr = stackToArray(s);
+    for (int i = 0; i < s->size; i++)
+    {
+        printf("%d\n",arr[i]);
+    }
+
     printf("pop %d\n",stackPop(s)); 
     printf("pop %d\n",stackPop(s)); 
     printf("pop %d\n",stackPop(s)); 
@@ -186,6 +192,10 @@ void testStack(){
 
     stackPush(s,2);
     stackPrint(s);
+
+    stackDelete(s);
+
+    printf("%d\n",s->end->value);
 }
 
 void testQueue(){
@@ -305,7 +315,7 @@ void testStringCopy(){
 
 int main(){
 
-    testSplit();
+    testStack();
 
     //add delete queue and stack and to array
     

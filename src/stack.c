@@ -37,6 +37,17 @@ int stackPop(stack_t* s){
     return v;
 }
 
+int* stackToArray(stack_t* stack){
+    int* arr = (int*)malloc(stack->size * sizeof(int));
+    nodeStack_t* node = stack->end;
+    for (int i = stack->size - 1; i >= 0; i--)
+    {
+        arr[i] = node->value;
+        node = node->previous;
+    }
+    return arr;
+}
+
 void stackPrint(stack_t* s){
     printf("Stack with %d values\n", s->size);
     nodeStack_t* node = s->end;
@@ -46,4 +57,12 @@ void stackPrint(stack_t* s){
         node = node->previous;
     }
     
+}
+
+void stackDelete(stack_t* stack){
+    for (int i = 0; i < stack->size; i++)
+    {
+        stackPop(stack);
+    }
+    free(stack);
 }
