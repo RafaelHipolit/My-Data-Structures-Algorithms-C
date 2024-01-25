@@ -8,6 +8,7 @@
 #include "../include/doublyLinkedList.h"
 #include "../include/iteratorDoublyLinkedList.h"
 #include "../include/stringList.h"
+#include "../include/dynamicArray.h"
 
 
 void testList(){
@@ -17,31 +18,31 @@ void testList(){
     listAddEnd(list, 2);
     ListPrint(list);
 
-    listAddAtPosition(list, 84, 0);
+    listAddAtIndex(list, 84, 0);
     ListPrint(list);
 
-    listAddAtPosition(list, 84, 1);
+    listAddAtIndex(list, 84, 1);
     ListPrint(list);
 
-    listAddAtPosition(list, 84, 3);
+    listAddAtIndex(list, 84, 3);
     ListPrint(list);
 
-    listAddAtPosition(list, 84, 5);
+    listAddAtIndex(list, 84, 5);
     ListPrint(list);
 
-    listAddAtPosition(list, 84, 7);
+    listAddAtIndex(list, 84, 7);
     ListPrint(list);
 
-    listRemoveAtPosition(list, 0);
+    listRemoveAtIndex(list, 0);
     ListPrint(list);
 
-    printf("%d\n",listRemoveAtPosition(list, 3));
+    printf("%d\n",listRemoveAtIndex(list, 3));
     ListPrint(list);
 
-    printf("%d\n",listRemoveAtPosition(list, 4));
+    printf("%d\n",listRemoveAtIndex(list, 4));
     ListPrint(list);
 
-    printf("%d\n",listRemoveAtPosition(list, 4));
+    printf("%d\n",listRemoveAtIndex(list, 4));
     ListPrint(list);
 }
 
@@ -313,11 +314,40 @@ void testStringCopy(){
     stringPrint(s);
 }
 
+void testDynamicArray(){
+    dynamicArray_t* arr = newDynamicArray();
+    dynamicArrayAddEnd(arr, 123);
+    dynamicArrayAddEnd(arr, 2);
+    dynamicArrayAddEnd(arr, 3);
+    dynamicArrayAddEnd(arr, 123);
+    dynamicArrayAddEnd(arr, 2);
+    dynamicArrayAddEnd(arr, 3);
+    dynamicArrayAddEnd(arr, 2);
+    dynamicArrayAddEnd(arr, 3);
+    dynamicArrayAddEnd(arr, 314159265);
+    printf("size max = %d\n",arr->maxSize);
+
+    for (int i = 0; i < dynamicArraySize(arr); i++)
+    {
+        printf("%d\n",dynamicArrayGet(arr,i));
+    }
+    
+    for (int i = 0; i < 9; i++)
+    {
+        dynamicArrayRemoveEnd(arr);
+    }
+
+    printf("size max = %d\n",arr->maxSize);
+    printf("aaa = %d\n",dynamicArrayGet(arr,0));
+
+    //precisa terminar de testar
+}
+
 int main(){
 
-    testStack();
+    testDynamicArray();
 
-    //add delete queue and stack and to array
+    //add delete queue and to array
     
     return 0;
 }

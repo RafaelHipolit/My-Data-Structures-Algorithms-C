@@ -104,9 +104,9 @@ int listRemoveBegin(linkedList_t* list){
     }
 }
 
-void listAddAtPosition(linkedList_t* list, int value, int pos) {
-    if (0 <= pos && pos < list->size){
-        if (pos == 0)
+void listAddAtIndex(linkedList_t* list, int value, int index) {
+    if (0 <= index && index < list->size){
+        if (index == 0)
         {
             listAddBegin(list, value);
         }else
@@ -115,7 +115,7 @@ void listAddAtPosition(linkedList_t* list, int value, int pos) {
             node->value = value;
 
             nodeList_t* prevNode = list->head;
-            for (int i = 0; i < pos - 1; i++)
+            for (int i = 0; i < index - 1; i++)
             {
                 prevNode = prevNode->next;
             }
@@ -128,22 +128,22 @@ void listAddAtPosition(linkedList_t* list, int value, int pos) {
     }
 }
 
-int listRemoveAtPosition(linkedList_t* list, int pos){
+int listRemoveAtIndex(linkedList_t* list, int index){
     if (list->size == 0)
     {
         return -1; //erro
     }
-    if (0 <= pos && pos < list->size){
-        if (pos == 0)
+    if (0 <= index && index < list->size){
+        if (index == 0)
         {
             return listRemoveBegin(list);
-        }else if (pos == list->size - 1)
+        }else if (index == list->size - 1)
         {
             return listRemoveEnd(list);
         }else
         {
             nodeList_t* prevNode = list->head;
-            for (int i = 0; i < pos - 1; i++)
+            for (int i = 0; i < index - 1; i++)
             {
                 prevNode = prevNode->next;
             }
@@ -162,11 +162,11 @@ int listRemoveAtPosition(linkedList_t* list, int pos){
     
 }
 
-int listGet(linkedList_t* list, int pos){ // return the value at position pos   
-    if (0 <= pos && pos < list->size)
+int listGet(linkedList_t* list, int index){ // return the value at index  
+    if (0 <= index && index < list->size)
     {
         nodeList_t* node = list->head;
-        for (int i = 0; i < pos; i++)
+        for (int i = 0; i < index; i++)
         {
             node = node->next;
         }
@@ -177,11 +177,11 @@ int listGet(linkedList_t* list, int pos){ // return the value at position pos
     return -1; //erro
 }
 
-void listSet(linkedList_t* list, int newValue, int pos){ // set the value at position pos   
-    if (0 <= pos && pos < list->size)
+void listSet(linkedList_t* list, int newValue, int index){ // set the value at index  
+    if (0 <= index && index < list->size)
     {
         nodeList_t* node = list->head;
-        for (int i = 0; i < pos; i++)
+        for (int i = 0; i < index; i++)
         {
             node = node->next;
         }
