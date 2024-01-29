@@ -15,6 +15,13 @@ typedef struct queue
 }queue_t;
 
 queue_t* newQueue();
+
 void queueEnqueue(queue_t* q, int value);
+
 int queueDequeue(queue_t* q);
+
+int* queueToArray(queue_t* queue);
+
 void queuePrint(queue_t* q);
+
+void queueDelete(queue_t* queue);

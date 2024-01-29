@@ -49,6 +49,17 @@ int queueDequeue(queue_t* q){
     }
 }
 
+int* queueToArray(queue_t* queue){
+    int* arr = (int*)malloc(queue->size * sizeof(int));
+    nodeQueue_t* node = queue->head;
+    for (int i = 0; i < queue->size; i++)
+    {
+        arr[i] = node->value;
+        node = node->next;
+    }
+    return arr;
+}
+
 void queuePrint(queue_t* q){
     printf("Queue with %d values\n", q->size);
     nodeQueue_t* node = q->head;
@@ -57,4 +68,12 @@ void queuePrint(queue_t* q){
         printf("list[%d] = %d\n",i,node->value);
         node = node->next;
     }
+}
+
+void queueDelete(queue_t* queue){
+    for (int i = 0; i < queue->size; i++)
+    {
+        queueDequeue(queue);
+    }
+    free(queue);
 }

@@ -220,8 +220,13 @@ void testQueue(){
 
     queuePrint(q); 
 
-    queueEnqueue(q, -9242842);
-    queuePrint(q);
+    queueEnqueue(q, 31415);
+
+    int* arr = queueToArray(q);
+    printf("%d\n",arr[0]);
+    free(arr);
+
+    queueDelete(q);
 }
 
 void testString(){
@@ -327,15 +332,9 @@ void testDynamicArray(){
     dynamicArrayAddEnd(arr, 314159265);
     printf("size max = %d\n",arr->maxSize);
 
-    for (int i = 0; i < dynamicArraySize(arr); i++)
-    {
-        printf("%d\n",dynamicArrayGet(arr,i));
-    }
+    dynamicArrayPrint(arr);
     
-    for (int i = 0; i < 9; i++)
-    {
-        dynamicArrayRemoveEnd(arr);
-    }
+    dynamicArrayClean(arr);
 
     printf("size max = %d\n",arr->maxSize);
     printf("aaa = %d\n",dynamicArrayGet(arr,0));
@@ -345,9 +344,8 @@ void testDynamicArray(){
 
 int main(){
 
-    testDynamicArray();
-
-    //add delete queue and to array
+    //testDynamicArray();
+    testQueue();
     
     return 0;
 }

@@ -25,6 +25,10 @@ int dynamicArrayGet(dynamicArray_t* dynamicArray, int index);
 
 void dynamicArraySet(dynamicArray_t* dynamicArray, int value, int index);
 
+void dynamicArrayPrint(dynamicArray_t* dynamicArray);
+
+void dynamicArrayClean(dynamicArray_t* dynamicArray);
+
 int* dynamicArrayToArray(dynamicArray_t* dynamicArray);
 
 void dynamicArrayDelete(dynamicArray_t* dynamicArray);
