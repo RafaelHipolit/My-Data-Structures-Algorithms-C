@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <limits.h>
 #include "../include/sortAlgorithms.h"
 
 //metodos para apenas uso interno
@@ -123,7 +124,7 @@ void merge(int vetor[], int inicio, int meio, int fim, int esq[], int dir[])
     {
         esq[i] = vetor[inicio + i];
     }
-    esq[esqSize - 1] = __INT_MAX__;
+    esq[esqSize - 1] = INT_MAX;
     // printf("esq=");
     // printVetor(esq,esqSize);
 
@@ -131,7 +132,7 @@ void merge(int vetor[], int inicio, int meio, int fim, int esq[], int dir[])
     {
         dir[i] = vetor[meio + 1 + i];
     }
-    dir[dirSize - 1] = __INT_MAX__;
+    dir[dirSize - 1] = INT_MAX;
     // printf("dir=");
     // printVetor(dir,dirSize);
 

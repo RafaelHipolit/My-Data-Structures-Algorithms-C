@@ -342,11 +342,107 @@ void testDynamicArray(){
     //precisa terminar de testar
 }
 
+void testTime(){
+    clock_t start, end;
+    double intevalo = 0;
+
+    printf("teste linked list \n");
+
+    start = clock();
+    linkedList_t* l = newLinkedList();
+    for (int i = 0; i < 9999999; i++)
+    {
+        listAddEnd(l,i);
+    }
+    end = clock();
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("criacao de lista: tempo(s)=%f\n", intevalo);
+
+    start = clock();
+    for (int i = l->size - 1001; i < l->size; i++)
+    {
+        //listSet(l,3,i);
+        //printf("%d-",i);
+    }
+    end = clock();
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("altetar os ultimos 1000 elementos forma trabalhosa da lista: tempo(s)=%f\n", intevalo);
+
+    start = clock();
+    for (int i = 0; i < 1000; i++)
+    {
+        listAddBegin(l,1);
+    }
+    end = clock();
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("add inicio 1000 elementos lista: tempo(s)=%f\n", intevalo);
+
+    start = clock();
+    for (int i = 0; i < 1000; i++)
+    {
+        listAddAtIndex(l,5,l->size/2);
+    }
+    end = clock();
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("add no meio 1000 elementos lista: tempo(s)=%f\n", intevalo);
+
+    start = clock();
+    int a;
+    nodeList_t* node = l->head;
+    for (int i = 0; i < l->size; i++)
+    {
+        a = node->value;
+        node = node->next;
+    }
+    end = clock();
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("roda a lista de forma rapida: tempo(s)=%f\n", intevalo);
+
+    listDelete(l);
+
+
+
+
+    printf("teste dynamic array \n");
+
+    start = clock();
+    dynamicArray_t* dyArr = newDynamicArray();
+    for (int i = 0; i < 9999999; i++)
+    {
+        dynamicArrayAddEnd(dyArr,i);
+    }
+    end = clock();
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("criacao de dynamic array: tempo(s)=%f\n", intevalo);
+
+    start = clock();
+    for (int i = dyArr->usedSize - 1001; i < dyArr->usedSize; i++)
+    {
+        dynamicArraySet(dyArr,3,i);
+    }
+    end = clock();
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("altetar os ultimos 1000 elementos dynamic array: tempo(s)=%f\n", intevalo);
+
+    start = clock();
+    for (int i = 0; i < dyArr->usedSize; i++)
+    {
+        a = dyArr->arrayPtr[i];
+    }
+    end = clock();
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("roda a dynamic array: tempo(s)=%f\n", intevalo);
+
+    dynamicArrayDelete(dyArr);
+
+}
+
 int main(){
 
     //testDynamicArray();
-    testQueue();
+    //testTime();
+
+    testSort();
     
     return 0;
 }
-

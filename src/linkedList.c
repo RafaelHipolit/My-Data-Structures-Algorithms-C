@@ -192,11 +192,11 @@ void listSet(linkedList_t* list, int newValue, int index){ // set the value at i
 
 void ListPrint(linkedList_t* list){
     printf("Linked List with %d values\n", list->size);
-    nodeList_t* e = list->head;
+    nodeList_t* node = list->head;
     for (int i = 0; i < list->size; i++)
     {
-        printf("list[%d] = %d\n",i,e->value);
-        e = e->next;
+        printf("list[%d] = %d\n",i,node->value);
+        node = node->next;
     }
     
 }
@@ -266,12 +266,12 @@ void listSort(linkedList_t* list){
     int* arr = listToArray(list);
     int size = list->size;
     quickSort(arr, 0, size-1);   
-    linkedList_t* listSorted = newLinkedListFromArray(arr, size);
+    linkedList_t* organizedList = newLinkedListFromArray(arr, size);
 
-    listCopy(listSorted, list);
+    listCopy(organizedList, list);
     //printf("Endereco da nova lista ligada = %p\n", list);
 
-    listDelete(listSorted);
+    listDelete(organizedList);
     free(arr);
 }
 
