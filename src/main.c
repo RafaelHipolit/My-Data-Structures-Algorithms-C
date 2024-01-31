@@ -333,16 +333,22 @@ void testDynamicArray(){
     printf("size max = %d\n",arr->maxSize);
 
     dynamicArrayPrint(arr);
+
+    for (int i = 0; i < 9999; i++)
+    {
+        dynamicArrayAddEnd(arr, i);
+    }
     
     dynamicArrayClean(arr);
 
     printf("size max = %d\n",arr->maxSize);
     printf("aaa = %d\n",dynamicArrayGet(arr,0));
 
-    //precisa terminar de testar
+    dynamicArrayDelete(arr);
 }
 
 void testTime(){
+    int lenght = 9999; //9999999
     clock_t start, end;
     double intevalo = 0;
 
@@ -350,7 +356,7 @@ void testTime(){
 
     start = clock();
     linkedList_t* l = newLinkedList();
-    for (int i = 0; i < 9999999; i++)
+    for (int i = 0; i < lenght; i++)
     {
         listAddEnd(l,i);
     }
@@ -361,7 +367,7 @@ void testTime(){
     start = clock();
     for (int i = l->size - 1001; i < l->size; i++)
     {
-        //listSet(l,3,i);
+        listSet(l,3,i);
         //printf("%d-",i);
     }
     end = clock();
@@ -407,7 +413,7 @@ void testTime(){
 
     start = clock();
     dynamicArray_t* dyArr = newDynamicArray();
-    for (int i = 0; i < 9999999; i++)
+    for (int i = 0; i < lenght; i++)
     {
         dynamicArrayAddEnd(dyArr,i);
     }
@@ -437,12 +443,9 @@ void testTime(){
 
 }
 
-int main(){
+int main(){ 
 
-    //testDynamicArray();
-    //testTime();
-
-    testSort();
+    testTime();
     
     return 0;
 }

@@ -22,17 +22,18 @@ void dynamicArrayAddEnd(dynamicArray_t* dynamicArray, int value){
     }else
     {
         int newMaxSize = dynamicArray->maxSize * INCREASE_FACTOR;
-        int* newArr = (int*)malloc(newMaxSize * sizeof(int));
-        for (int i = 0; i < dynamicArray->usedSize; i++)
+        int* newArr = (int*)realloc(dynamicArray->arrayPtr,newMaxSize * sizeof(int));
+        if (newArr == NULL)
         {
-            newArr[i] = dynamicArray->arrayPtr[i];
+            printf("Error when resizing array\n"); //muda isso
         }
-        free(dynamicArray->arrayPtr);
-        dynamicArray->arrayPtr = newArr;
-        dynamicArray->maxSize = newMaxSize;
+        else {
+            dynamicArray->arrayPtr = newArr;
+            dynamicArray->maxSize = newMaxSize;
 
-        dynamicArray->arrayPtr[dynamicArray->usedSize] = value;
-        dynamicArray->usedSize++;
+            dynamicArray->arrayPtr[dynamicArray->usedSize] = value;
+            dynamicArray->usedSize++;
+        } 
     }
 }
 
