@@ -331,7 +331,20 @@ void testDynamicArray(){
     dynamicArrayAddEnd(arr, 3);
     dynamicArrayAddEnd(arr, 314159265);
     printf("size max = %d\n",arr->maxSize);
+    dynamicArrayPrint(arr);
 
+    printf("%d\n", dynamicArrayRemoveEnd(arr));
+    printf("size max = %d\n", arr->maxSize);
+    printf("%d\n", dynamicArrayRemoveEnd(arr));
+    printf("size max = %d\n", arr->maxSize);
+    printf("%d\n", dynamicArrayRemoveEnd(arr));
+    printf("size max = %d\n", arr->maxSize);
+    printf("%d\n", dynamicArrayRemoveEnd(arr));
+    printf("size max = %d\n", arr->maxSize);
+    printf("%d\n", dynamicArrayRemoveEnd(arr));
+    printf("size max = %d\n", arr->maxSize);
+    printf("%d\n", dynamicArrayRemoveEnd(arr));
+    printf("size max = %d\n", arr->maxSize);
     dynamicArrayPrint(arr);
 
     for (int i = 0; i < 9999; i++)
@@ -342,7 +355,7 @@ void testDynamicArray(){
     dynamicArrayClean(arr);
 
     printf("size max = %d\n",arr->maxSize);
-    printf("aaa = %d\n",dynamicArrayGet(arr,0));
+    printf("array[0] = %d\n",dynamicArrayGet(arr,0));
 
     dynamicArrayDelete(arr);
 }
@@ -445,7 +458,8 @@ void testTime(){
 
 int main(){ 
 
-    testTime();
+    //testTime();
+    testDynamicArray();
     
     return 0;
 }

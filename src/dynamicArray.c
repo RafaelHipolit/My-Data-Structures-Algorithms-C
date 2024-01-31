@@ -25,7 +25,7 @@ void dynamicArrayAddEnd(dynamicArray_t* dynamicArray, int value){
         int* newArr = (int*)realloc(dynamicArray->arrayPtr,newMaxSize * sizeof(int));
         if (newArr == NULL)
         {
-            printf("Error when resizing array\n"); //muda isso
+            printf("Error when resizing array\n"); //mudar isso
         }
         else {
             dynamicArray->arrayPtr = newArr;
@@ -40,25 +40,26 @@ void dynamicArrayAddEnd(dynamicArray_t* dynamicArray, int value){
 int dynamicArrayRemoveEnd(dynamicArray_t* dynamicArray){
     if (dynamicArray->usedSize == 0)
     {
-        return -1;
+        return -1; //mudar isso
     }
     
     int value = dynamicArray->arrayPtr[dynamicArray->usedSize - 1];
     dynamicArray->usedSize--;
     
     //printf("tamanho pra diminuir %d\n", (int)(dynamicArray->maxSize * DECREASE_FACTOR));
-    printf("%d\n",dynamicArray->usedSize);
+    //printf("%d\n",dynamicArray->usedSize);
     if (dynamicArray->usedSize < (int)(dynamicArray->maxSize * DECREASE_FACTOR) && dynamicArray->maxSize > INITIAL_SIZE)
     {
         int newMaxSize = (int)(dynamicArray->maxSize / INCREASE_FACTOR);
-        int* newArr = (int*)malloc(newMaxSize * sizeof(int));
-        for (int i = 0; i < dynamicArray->usedSize; i++)
+        int* newArr = (int*)realloc(dynamicArray->arrayPtr, newMaxSize * sizeof(int));
+        if (newArr == NULL)
         {
-            newArr[i] = dynamicArray->arrayPtr[i];
+            printf("Error when resizing array\n"); //mudar isso
         }
-        free(dynamicArray->arrayPtr);
-        dynamicArray->arrayPtr = newArr;
-        dynamicArray->maxSize = newMaxSize;
+        else {
+            dynamicArray->arrayPtr = newArr;
+            dynamicArray->maxSize = newMaxSize;
+        }
         //printf("diminuiu, novo tamanho %d\n", newMaxSize);
     }
 
@@ -68,13 +69,16 @@ int dynamicArrayRemoveEnd(dynamicArray_t* dynamicArray){
 int dynamicArrayGet(dynamicArray_t* dynamicArray, int index){
     if (index > dynamicArray->usedSize - 1)
     {
-        return -1;
+        return -1; //mudar isso
     }
     return dynamicArray->arrayPtr[index];
 }
 
 void dynamicArraySet(dynamicArray_t* dynamicArray, int value, int index){
-    dynamicArray->arrayPtr[index] = value;
+    if (index < dynamicArray->usedSize)
+    {
+        dynamicArray->arrayPtr[index] = value;
+    }
 }
 
 void dynamicArrayPrint(dynamicArray_t* dynamicArray){
