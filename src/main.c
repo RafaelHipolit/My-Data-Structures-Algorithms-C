@@ -358,6 +358,8 @@ void testDynamicArray(){
     printf("array[0] = %d\n",dynamicArrayGet(arr,0));
 
     dynamicArrayDelete(arr);
+
+    //precisa terminar de testar
 }
 
 void testTime(){

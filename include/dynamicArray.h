@@ -21,6 +21,10 @@ void dynamicArrayAddEnd(dynamicArray_t* dynamicArray, int value);
 
 int dynamicArrayRemoveEnd(dynamicArray_t* dynamicArray);
 
+void dynamicArrayAddAtIndex(dynamicArray_t* dynamicArray, int value, int index);
+
+int dynamicArrayRemoveAtIndex(dynamicArray_t* dynamicArray, int index);
+
 int dynamicArrayGet(dynamicArray_t* dynamicArray, int index);
 
 void dynamicArraySet(dynamicArray_t* dynamicArray, int value, int index);

@@ -25,7 +25,7 @@ void dynamicArrayAddEnd(dynamicArray_t* dynamicArray, int value){
         int* newArr = (int*)realloc(dynamicArray->arrayPtr,newMaxSize * sizeof(int));
         if (newArr == NULL)
         {
-            printf("Error when resizing array\n"); //mudar isso
+            printf("Error when resizing array\n"); //mudar isso, nao quero ficar dando print, quero de alguma retornar um status de erro
         }
         else {
             dynamicArray->arrayPtr = newArr;
@@ -64,6 +64,76 @@ int dynamicArrayRemoveEnd(dynamicArray_t* dynamicArray){
     }
 
     return value;
+}
+
+void dynamicArrayAddAtIndex(dynamicArray_t* dynamicArray, int value, int index) {
+    if (0 <= index && index < dynamicArray->usedSize) {
+        //por enquanto, a funcao dynamicArrayAddAtIndex so vai add elementos em index ja preenchidos
+        
+        if (dynamicArray->usedSize < dynamicArray->maxSize) {
+            for (int i = dynamicArray->usedSize - 1; i >= index; i--)
+            {
+                dynamicArray->arrayPtr[i + 1] = dynamicArray->arrayPtr[i];
+            }
+            dynamicArray->arrayPtr[index] = value;
+            dynamicArray->usedSize++;
+        }
+        else {
+            int newMaxSize = (int)(dynamicArray->maxSize / INCREASE_FACTOR);
+            int* newArr = (int*)realloc(dynamicArray->arrayPtr, newMaxSize * sizeof(int));
+            if (newArr == NULL)
+            {
+                printf("Error when resizing array\n"); //mudar isso
+            }
+            else {
+                dynamicArray->arrayPtr = newArr;
+                dynamicArray->maxSize = newMaxSize;
+
+                for (int i = dynamicArray->usedSize - 1; i >= index; i--)
+                {
+                    dynamicArray->arrayPtr[i + 1] = dynamicArray->arrayPtr[i];
+                }
+                dynamicArray->arrayPtr[index] = value;
+                dynamicArray->usedSize++;
+            }
+        } 
+    }
+    else if (index >= dynamicArray->usedSize) {
+        // se pedir pra add num index ainda nao preenchida, vai add no final(primeiro index nao preencido)
+        dynamicArrayAddEnd(dynamicArray, value);
+    }
+}
+
+int dynamicArrayRemoveAtIndex(dynamicArray_t* dynamicArray, int index){
+    if (0 <= index && index < dynamicArray->usedSize) {
+        int value = dynamicArray->arrayPtr[index];
+        for (int i = index; i < dynamicArray->usedSize; i++)
+        {
+            dynamicArray->arrayPtr[i] = dynamicArray->arrayPtr[i + 1];
+        }
+        dynamicArray->usedSize--;
+
+        if (dynamicArray->usedSize < (int)(dynamicArray->maxSize * DECREASE_FACTOR) && dynamicArray->maxSize > INITIAL_SIZE)
+        {
+            int newMaxSize = (int)(dynamicArray->maxSize / INCREASE_FACTOR);
+            int* newArr = (int*)realloc(dynamicArray->arrayPtr, newMaxSize * sizeof(int));
+            if (newArr == NULL)
+            {
+                printf("Error when resizing array\n"); //mudar isso
+            }
+            else {
+                dynamicArray->arrayPtr = newArr;
+                dynamicArray->maxSize = newMaxSize;
+            }
+            //printf("diminuiu, novo tamanho %d\n", newMaxSize);
+        }
+
+        return value;
+    }
+    else {
+        // caso dynamicArray->usedSize == 0 cai aqui
+        return -1;//mudar isso
+    }
 }
 
 int dynamicArrayGet(dynamicArray_t* dynamicArray, int index){
