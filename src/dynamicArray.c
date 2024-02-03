@@ -79,7 +79,7 @@ void dynamicArrayAddAtIndex(dynamicArray_t* dynamicArray, int value, int index) 
             dynamicArray->usedSize++;
         }
         else {
-            int newMaxSize = (int)(dynamicArray->maxSize / INCREASE_FACTOR);
+            int newMaxSize = dynamicArray->maxSize * INCREASE_FACTOR;
             int* newArr = (int*)realloc(dynamicArray->arrayPtr, newMaxSize * sizeof(int));
             if (newArr == NULL)
             {
@@ -97,10 +97,6 @@ void dynamicArrayAddAtIndex(dynamicArray_t* dynamicArray, int value, int index) 
                 dynamicArray->usedSize++;
             }
         } 
-    }
-    else if (index >= dynamicArray->usedSize) {
-        // se pedir pra add num index ainda nao preenchida, vai add no final(primeiro index nao preencido)
-        dynamicArrayAddEnd(dynamicArray, value);
     }
 }
 

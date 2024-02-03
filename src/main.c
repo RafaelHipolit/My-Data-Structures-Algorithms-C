@@ -347,11 +347,34 @@ void testDynamicArray(){
     printf("size max = %d\n", arr->maxSize);
     dynamicArrayPrint(arr);
 
-    for (int i = 0; i < 9999; i++)
+    for (int i = 0; i < 999; i++)
     {
-        dynamicArrayAddEnd(arr, i);
+        //dynamicArrayAddEnd(arr, i);
     }
     
+    dynamicArrayClean(arr);
+    printf("----------------");
+    dynamicArrayAddEnd(arr, 3);
+    dynamicArrayAddEnd(arr, 1);
+    dynamicArrayAddEnd(arr, 4);
+    dynamicArrayAddEnd(arr, 1);
+    printf("size max = %d\n", arr->maxSize);
+    dynamicArrayPrint(arr);
+
+    dynamicArrayAddAtIndex(arr,0,1);
+    printf("size max = %d\n", arr->maxSize);
+    dynamicArrayPrint(arr);
+
+    dynamicArrayRemoveAtIndex(arr,3);
+    printf("size max = %d\n", arr->maxSize);
+    dynamicArrayPrint(arr);
+
+    dynamicArrayRemoveAtIndex(arr,0);
+    dynamicArrayRemoveAtIndex(arr,0);
+    dynamicArrayRemoveAtIndex(arr,0);
+    printf("size max = %d\n", arr->maxSize);
+    dynamicArrayPrint(arr);
+
     dynamicArrayClean(arr);
 
     printf("size max = %d\n",arr->maxSize);
@@ -363,7 +386,7 @@ void testDynamicArray(){
 }
 
 void testTime(){
-    int lenght = 9999; //9999999
+    int lenght = 9999999; //9999999
     clock_t start, end;
     double intevalo = 0;
 
@@ -446,6 +469,24 @@ void testTime(){
     printf("altetar os ultimos 1000 elementos dynamic array: tempo(s)=%f\n", intevalo);
 
     start = clock();
+    for (int i = 0; i < 1000; i++)
+    {
+        dynamicArrayAddAtIndex(dyArr,1,0);
+    }
+    end = clock();
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("add inicio 1000 elementos lista: tempo(s)=%f\n", intevalo);
+
+    start = clock();
+    for (int i = 0; i < 1000; i++)
+    {
+        dynamicArrayAddAtIndex(dyArr,5,l->size/2);
+    }
+    end = clock();
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("add no meio 1000 elementos lista: tempo(s)=%f\n", intevalo);
+
+    start = clock();
     for (int i = 0; i < dyArr->usedSize; i++)
     {
         a = dyArr->arrayPtr[i];
@@ -460,8 +501,9 @@ void testTime(){
 
 int main(){ 
 
-    //testTime();
-    testDynamicArray();
+    testTime();
+    //testDynamicArray();
+
     
     return 0;
 }
