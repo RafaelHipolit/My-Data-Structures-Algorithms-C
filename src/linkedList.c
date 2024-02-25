@@ -11,6 +11,12 @@ linkedList_t* newLinkedList(){
     return list;
 }
 
+void initLinkedList(linkedList_t* list){
+    list->head = NULL;
+    list->end = NULL;
+    list->size = 0;
+}
+
 linkedList_t* newLinkedListFromArray(int *arr, int length){
     linkedList_t* list = newLinkedList();
     for (int i = 0; i < length; i++)
@@ -228,7 +234,7 @@ void listDelete(linkedList_t* list){
 // FUNCTION sortList() - funcao para organizar a lista
 
 // funcao antiga com erro simples: variavel criada nos paramentros da funcao nao altera a variavel que foi passa na chamada da funcao 
-void listSortERRO(linkedList_t* list){
+void listSort_COM_ERRO(linkedList_t* list){
     int* arr = listToArray(list);
     int size = list->size;
     quickSort(arr, 0, size-1);
@@ -266,12 +272,10 @@ void listSort(linkedList_t* list){
     int* arr = listToArray(list);
     int size = list->size;
     quickSort(arr, 0, size-1);   
-    linkedList_t* organizedList = newLinkedListFromArray(arr, size);
 
-    listCopy(organizedList, list);
+    listCopyArray(list, arr, size);
     //printf("Endereco da nova lista ligada = %p\n", list);
 
-    listDelete(organizedList);
     free(arr);
 }
 
@@ -308,6 +312,55 @@ void listCopy(linkedList_t* listCopy, linkedList_t* listPaste){
         nodeCopy = nodeCopy->next;
     }
     
+}
+
+void listCopyArray(linkedList_t* listPaste, int* arrayCopy, int arrayLenght){
+    nodeList_t* node = listPaste->head;
+    if (listPaste->size >= arrayLenght)
+    {
+        for (int i = 0; i < arrayLenght - 1; i++)
+        {
+            node->value = arrayCopy[i];
+            node = node->next;
+        }
+        node->value = arrayCopy[arrayLenght - 1];
+        listPaste->end = node;
+        listPaste->size = arrayLenght;
+        node = node->next;
+        nodeList_t* nextNode;
+        for (int i = arrayLenght; i < listPaste->size; i++)
+        {
+            nextNode = node->next;
+            free(node);
+            node = nextNode;  
+        }
+    }else
+    {
+        for (int i = 0; i < listPaste->size; i++)
+        {
+            node->value = arrayCopy[i];
+            node = node->next;
+        }
+        for (int i = listPaste->size; i < arrayLenght; i++)
+        {
+            listAddEnd(listPaste, arrayCopy[i]);
+        }
+    }
+    
+}
+
+void listClear(linkedList_t* list){
+    nodeList_t* node = list->head;
+    nodeList_t* nextNode;
+    for (int i = 0; i < list->size; i++)
+    {
+        nextNode = node->next;
+        free(node);
+        node = nextNode;
+    }
+    list->head = NULL;
+    list->end = NULL;
+    list->size = 0;
 }
 
 //TEM QUE DOCUMENTAR AS FUNCOES

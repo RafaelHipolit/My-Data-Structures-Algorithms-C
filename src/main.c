@@ -390,7 +390,7 @@ void testTime(){
     clock_t start, end;
     double intevalo = 0;
 
-    printf("teste linked list \n");
+    printf("teste linked list \n"); //===============================================================================
 
     start = clock();
     linkedList_t* l = newLinkedList();
@@ -442,12 +442,20 @@ void testTime(){
     intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("roda a lista de forma rapida: tempo(s)=%f\n", intevalo);
 
+    start = clock();
+    listClear(l);
+    end = clock();
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("limpar: tempo(s)=%f\n", intevalo);
+
     listDelete(l);
+    printf("\n");
 
 
 
 
-    printf("teste dynamic array \n");
+    printf("teste dynamic array \n"); //===============================================================================
+
 
     start = clock();
     dynamicArray_t* dyArr = newDynamicArray();
@@ -495,14 +503,22 @@ void testTime(){
     intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("roda a dynamic array: tempo(s)=%f\n", intevalo);
 
+    start = clock();
+    dynamicArrayClear(dyArr);
+    end = clock();
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("limpar: tempo(s)=%f\n", intevalo);
+
     dynamicArrayDelete(dyArr);
 
 }
 
 int main(){ 
 
-    testTime();
+    //testTime();
     //testDynamicArray();
+
+    void testListCopy();
 
     
     return 0;

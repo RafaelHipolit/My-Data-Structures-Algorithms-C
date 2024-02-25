@@ -80,7 +80,8 @@ void dynamicArrayAddAtIndex(dynamicArray_t* dynamicArray, int value, int index) 
         }
         else {
             int newMaxSize = dynamicArray->maxSize * INCREASE_FACTOR;
-            int* newArr = (int*)realloc(dynamicArray->arrayPtr, newMaxSize * sizeof(int));
+            int* newArr = (int*)realloc(dynamicArray->arrayPtr, newMaxSize * sizeof(int)); //realloc aqui realmente eh a melhor opcao? 
+            //tipo, se o realloc copia pra outro endereco e depois eu vou vou mover quase todos os elementos uma casa pra frente. nao sei mais eficaz fazer um malloc e ja copiar os elemntos uma casa pra frente?
             if (newArr == NULL)
             {
                 printf("Error when resizing array\n"); //mudar isso
@@ -154,7 +155,7 @@ void dynamicArrayPrint(dynamicArray_t* dynamicArray){
     }
 }
 
-void dynamicArrayClean(dynamicArray_t* dynamicArray){
+void dynamicArrayClear(dynamicArray_t* dynamicArray){
     free(dynamicArray->arrayPtr);
     dynamicArray->arrayPtr = (int*)malloc(INITIAL_SIZE * sizeof(int));
     dynamicArray->maxSize = INITIAL_SIZE;
