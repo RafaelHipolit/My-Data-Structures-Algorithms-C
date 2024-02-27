@@ -1,50 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "../include/linkedList.h"
+#include "../include/singlyLinkedList.h"
 #include "../include/stack.h"
 #include "../include/queue.h"
 #include "../include/sortAlgorithms.h"
-#include "../include/doublyLinkedList.h"
-#include "../include/iteratorDoublyLinkedList.h"
+#include "../include/linkedList.h"
+#include "../include/iteratorLinkedList.h"
 #include "../include/stringList.h"
 #include "../include/dynamicArray.h"
 
-
-void testList(){
-    linkedList_t* list = newLinkedList();
-    listAddEnd(list, 5);
-    listAddEnd(list, 10);
-    listAddEnd(list, 2);
-    ListPrint(list);
-
-    listAddAtIndex(list, 84, 0);
-    ListPrint(list);
-
-    listAddAtIndex(list, 84, 1);
-    ListPrint(list);
-
-    listAddAtIndex(list, 84, 3);
-    ListPrint(list);
-
-    listAddAtIndex(list, 84, 5);
-    ListPrint(list);
-
-    listAddAtIndex(list, 84, 7);
-    ListPrint(list);
-
-    listRemoveAtIndex(list, 0);
-    ListPrint(list);
-
-    printf("%d\n",listRemoveAtIndex(list, 3));
-    ListPrint(list);
-
-    printf("%d\n",listRemoveAtIndex(list, 4));
-    ListPrint(list);
-
-    printf("%d\n",listRemoveAtIndex(list, 4));
-    ListPrint(list);
-}
 
 void testSort(){
     //int size = 10000000;
@@ -117,6 +82,44 @@ void testSort(){
     organized(vetor3, size);
 }
 
+/*
+======================= PRECISA RENOMEAR =================================  
+
+void testList(){
+    linkedList_t* list = newLinkedList();
+    listAddEnd(list, 5);
+    listAddEnd(list, 10);
+    listAddEnd(list, 2);
+    ListPrint(list);
+
+    listAddAtIndex(list, 84, 0);
+    ListPrint(list);
+
+    listAddAtIndex(list, 84, 1);
+    ListPrint(list);
+
+    listAddAtIndex(list, 84, 3);
+    ListPrint(list);
+
+    listAddAtIndex(list, 84, 5);
+    ListPrint(list);
+
+    listAddAtIndex(list, 84, 7);
+    ListPrint(list);
+
+    listRemoveAtIndex(list, 0);
+    ListPrint(list);
+
+    printf("%d\n",listRemoveAtIndex(list, 3));
+    ListPrint(list);
+
+    printf("%d\n",listRemoveAtIndex(list, 4));
+    ListPrint(list);
+
+    printf("%d\n",listRemoveAtIndex(list, 4));
+    ListPrint(list);
+}
+
 void testListSort(){
     linkedList_t* list = newLinkedList();
     listAddEnd(list, 10);
@@ -162,6 +165,32 @@ void testDoublyLinkedList(){
     //doublyLinkedList_t* list = newDoublyLinkedList();
     //iteratorDoublyLinkedList_t* i = newIteratorDoublyLinkedList(list);
 }
+
+void testLinkedListTime(){
+    double intevalo = 0;
+    clock_t start, end;
+    
+
+    start = clock();
+    linkedList_t* l = newLinkedList();
+    for (int i = 0; i < 99999; i++)
+    {
+        listAddEnd(l,i);
+    }
+    for (int i = 0; i < l->size; i++)
+    {
+        listSet(l,3,i);
+    }
+    listDelete(l);
+   
+    end = clock();
+
+    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("tempo(s)=%f\n", intevalo);
+}
+
+*/
+
 
 void testStack(){
     printf("Hello world!\n");
@@ -243,29 +272,6 @@ void testString(){
     stringPrint(s);
     stringSet(s, "oyasuminasai");
     stringPrint(s);
-}
-
-void testLinkedListTime(){
-    double intevalo = 0;
-    clock_t start, end;
-    
-
-    start = clock();
-    linkedList_t* l = newLinkedList();
-    for (int i = 0; i < 99999; i++)
-    {
-        listAddEnd(l,i);
-    }
-    for (int i = 0; i < l->size; i++)
-    {
-        listSet(l,3,i);
-    }
-    listDelete(l);
-   
-    end = clock();
-
-    intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("tempo(s)=%f\n", intevalo);
 }
 
 void testSortTime(){
@@ -352,7 +358,7 @@ void testDynamicArray(){
         //dynamicArrayAddEnd(arr, i);
     }
     
-    dynamicArrayClean(arr);
+    dynamicArrayClear(arr);
     printf("----------------");
     dynamicArrayAddEnd(arr, 3);
     dynamicArrayAddEnd(arr, 1);
@@ -375,7 +381,7 @@ void testDynamicArray(){
     printf("size max = %d\n", arr->maxSize);
     dynamicArrayPrint(arr);
 
-    dynamicArrayClean(arr);
+    dynamicArrayClear(arr);
 
     printf("size max = %d\n",arr->maxSize);
     printf("array[0] = %d\n",dynamicArrayGet(arr,0));
@@ -385,8 +391,9 @@ void testDynamicArray(){
     //precisa terminar de testar
 }
 
+/*
 void testTime(){
-    int lenght = 9999999; //9999999
+    int lenght = 9999; //9999999
     clock_t start, end;
     double intevalo = 0;
 
@@ -396,7 +403,7 @@ void testTime(){
     linkedList_t* l = newLinkedList();
     for (int i = 0; i < lenght; i++)
     {
-        listAddEnd(l,i);
+        linkedListAddEnd(l,i);
     }
     end = clock();
     intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
@@ -405,7 +412,7 @@ void testTime(){
     start = clock();
     for (int i = l->size - 1001; i < l->size; i++)
     {
-        listSet(l,3,i);
+        linkedListSet(l,3,i);
         //printf("%d-",i);
     }
     end = clock();
@@ -415,7 +422,7 @@ void testTime(){
     start = clock();
     for (int i = 0; i < 1000; i++)
     {
-        listAddBegin(l,1);
+        linkedListAddBegin(l,1);
     }
     end = clock();
     intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
@@ -424,7 +431,7 @@ void testTime(){
     start = clock();
     for (int i = 0; i < 1000; i++)
     {
-        listAddAtIndex(l,5,l->size/2);
+        linkedListAddAtIndex(l,5,l->size/2);
     }
     end = clock();
     intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
@@ -432,7 +439,7 @@ void testTime(){
 
     start = clock();
     int a;
-    nodeList_t* node = l->head;
+    nodeLinkedList_t* node = l->head;
     for (int i = 0; i < l->size; i++)
     {
         a = node->value;
@@ -443,12 +450,12 @@ void testTime(){
     printf("roda a lista de forma rapida: tempo(s)=%f\n", intevalo);
 
     start = clock();
-    listClear(l);
+    linkedListClear(l);
     end = clock();
     intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("limpar: tempo(s)=%f\n", intevalo);
 
-    listDelete(l);
+    linkedListDelete(l);
     printf("\n");
 
 
@@ -513,13 +520,12 @@ void testTime(){
 
 }
 
+*/
+
 int main(){ 
 
     //testTime();
-    //testDynamicArray();
-
-    void testListCopy();
-
+    
     
     return 0;
 }

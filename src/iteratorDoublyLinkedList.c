@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/iteratorDoublyLinkedList.h"
+#include "../include/iteratorLinkedList.h"
 
-iteratorDoublyLinkedList_t* newIteratorDoublyLinkedList(doublyLinkedList_t* list){
-    iteratorDoublyLinkedList_t* i = (iteratorDoublyLinkedList_t*) malloc(sizeof(iteratorDoublyLinkedList_t));
+iteratorLinkedList_t* newIteratorDoublyLinkedList(linkedList_t* list){
+    iteratorLinkedList_t* i = (iteratorLinkedList_t*) malloc(sizeof(iteratorLinkedList_t));
     i->list = list;
     i->node = list->head;
     return i;
 }
 
-int iteratorNext(iteratorDoublyLinkedList_t* i){
+int iteratorNext(iteratorLinkedList_t* i){
     if (i->node->next == NULL)
     {
         return -1;
@@ -18,7 +18,7 @@ int iteratorNext(iteratorDoublyLinkedList_t* i){
     return 0;
 }
 
-int iteratorPrevious(iteratorDoublyLinkedList_t* i){
+int iteratorPrevious(iteratorLinkedList_t* i){
     if (i->node->previous == NULL)
     {
         return -1;
@@ -27,15 +27,15 @@ int iteratorPrevious(iteratorDoublyLinkedList_t* i){
     return 0;
 }
 
-int iteratorGetValue(iteratorDoublyLinkedList_t* i){
+int iteratorGetValue(iteratorLinkedList_t* i){
     return i->node->value;
 }
 
-void iteratorSetValue(iteratorDoublyLinkedList_t* i, int value){
+void iteratorSetValue(iteratorLinkedList_t* i, int value){
     i->node->value = value;
 }
 
-int iteratorIsEnd(iteratorDoublyLinkedList_t* i){
+int iteratorIsEnd(iteratorLinkedList_t* i){
     if (i->node == i->list->end)
     {
         return 1;
@@ -44,7 +44,7 @@ int iteratorIsEnd(iteratorDoublyLinkedList_t* i){
     }
 }
 
-void iteratorToBegin(iteratorDoublyLinkedList_t* i){ //ver se tem um nome melhor
+void iteratorToBegin(iteratorLinkedList_t* i){ //ver se tem um nome melhor
     i->node = i->list->head;
 }
 
