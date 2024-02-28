@@ -160,12 +160,6 @@ void testListCopy(){
     ListPrint(list);
 }
 
-void testDoublyLinkedList(){
-    //TESTAR   
-    //doublyLinkedList_t* list = newDoublyLinkedList();
-    //iteratorDoublyLinkedList_t* i = newIteratorDoublyLinkedList(list);
-}
-
 void testLinkedListTime(){
     double intevalo = 0;
     clock_t start, end;
@@ -392,6 +386,7 @@ void testDynamicArray(){
 }
 
 /*
+
 void testTime(){
     int lenght = 9999; //9999999
     clock_t start, end;
@@ -519,13 +514,28 @@ void testTime(){
     dynamicArrayDelete(dyArr);
 
 }
-
 */
+
+void testLinkedList(){
+    linkdedListStatus_t status;
+    linkedList_t* list = newLinkedList(&status);
+    if (status != LINKED_LIST_SUCESS)
+    {
+        printf("Ocorreu um erro de codigo %d \n", status);
+        return;
+    }
+    
+
+    linkedListAddEnd(list, 1, NULL);
+}
 
 int main(){ 
 
     //testTime();
-    
+    testLinkedList();
     
     return 0;
 }
+
+// gcc *.c -o test/main
+// ./test/main
