@@ -520,28 +520,26 @@ void testLinkedList()
     linkedList_t *list = newLinkedList(&status);
     if (status != LINKED_LIST_SUCESS)
     {
-        printf("Ocorreu um erro na criacao da lista de codigo %d \n", status);
+        printf("erro ao criar a linkedList_t\n");
+        linkedListPrintStatusErro(status);
         return;
     }
-
-    for (size_t i = 0; i < 3; i++)
+    
+    for (size_t i = 0; i < 7; i++)
     {
         linkedListAddEnd(list, i, &status);
-        if (status != LINKED_LIST_SUCESS)
-        {
-            printf("Ocorreu um erro de codigo %d \n", status);
-        }
+        linkedListPrintStatusErro(status);
     }
+
+    linkedListAddAtIndex(list, -1, 999, &status);
+    linkedListPrintStatusErro(status);
 
     linkedListPrint(list);
 
     for (size_t i = 0; i < 4; i++)
     {
         linkedListRemoveEnd(list, &status);
-        if (status != LINKED_LIST_SUCESS)
-        {
-            printf("Ocorreu um erro de codigo %d \n", status);
-        }
+        linkedListPrintStatusErro(status);
     }
 
     linkedListDelete(list);
