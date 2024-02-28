@@ -18,16 +18,20 @@ typedef struct linkedList
 
 } linkedList_t;
 
-typedef enum linkdedListStatus
+typedef enum linkedListStatus
 {
     LINKED_LIST_SUCESS = 0,
     LINKED_LIST_ERRO_MALLOC = -1,
     LINKED_LIST_ERRO_EMPTY = -2,
     LINKED_LIST_ERRO_MAX_LENGTH = -3
-} linkdedListStatus_t;
+} linkedListStatus_t;
 
-linkedList_t *newLinkedList(linkdedListStatus_t *status);
+linkedList_t *newLinkedList(linkedListStatus_t *OperationStatus);
 
-void linkedListAddEnd(linkedList_t *list, int value, linkdedListStatus_t *status);
+void linkedListAddEnd(linkedList_t *list, int value, linkedListStatus_t *OperationStatus);
 
-int linkedListRemoveEnd(linkedList_t *list, linkdedListStatus_t *status);
+int linkedListRemoveEnd(linkedList_t *list, linkedListStatus_t *OperationStatus);
+
+void linkedListPrint(linkedList_t *list);
+
+void linkedListDelete(linkedList_t *list);

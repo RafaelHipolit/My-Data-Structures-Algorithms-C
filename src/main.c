@@ -10,9 +10,9 @@
 #include "../include/stringList.h"
 #include "../include/dynamicArray.h"
 
-
-void testSort(){
-    //int size = 10000000;
+void testSort()
+{
+    // int size = 10000000;
     int size = 10000;
     int *vetor1 = (int *)malloc((size) * sizeof(int));
     int *vetor2 = (int *)malloc((size) * sizeof(int));
@@ -25,16 +25,14 @@ void testSort(){
     {
         randomNum = rand();
         vetor1[i] = randomNum;
-        vetor2[i] = randomNum; 
-        vetor3[i] = randomNum; 
+        vetor2[i] = randomNum;
+        vetor3[i] = randomNum;
     }
-    
-    //printVetor(vetor1,size);
+
+    // printVetor(vetor1,size);
 
     clock_t start, end;
     double intevalo = 0;
-
-
 
     printf("\nMergeSort\n");
 
@@ -45,12 +43,9 @@ void testSort(){
     intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("tempo(s)=%f\n", intevalo);
 
-    //printVetor(vetor1,size);
+    // printVetor(vetor1,size);
     printf("verificando... ");
     organized(vetor1, size);
-
-
-
 
     printf("\nQuickSort\n");
 
@@ -61,12 +56,9 @@ void testSort(){
     intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("tempo(s)=%f\n", intevalo);
 
-    //printVetor(vetor2,size);
+    // printVetor(vetor2,size);
     printf("verificando... ");
     organized(vetor2, size);
-
-
-
 
     printf("\nInsertionSort\n");
 
@@ -77,13 +69,13 @@ void testSort(){
     intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("tempo(s)=%f\n", intevalo);
 
-    //printVetor(vetor3,size);
+    // printVetor(vetor3,size);
     printf("verificando... ");
     organized(vetor3, size);
 }
 
 /*
-======================= PRECISA RENOMEAR =================================  
+======================= PRECISA RENOMEAR =================================
 
 void testList(){
     linkedList_t* list = newLinkedList();
@@ -163,7 +155,7 @@ void testListCopy(){
 void testLinkedListTime(){
     double intevalo = 0;
     clock_t start, end;
-    
+
 
     start = clock();
     linkedList_t* l = newLinkedList();
@@ -176,7 +168,7 @@ void testLinkedListTime(){
         listSet(l,3,i);
     }
     listDelete(l);
-   
+
     end = clock();
 
     intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
@@ -185,45 +177,46 @@ void testLinkedListTime(){
 
 */
 
-
-void testStack(){
+void testStack()
+{
     printf("Hello world!\n");
 
-    stack_t* s = newStack();
-    stackPush(s,1);
-    stackPush(s,1);
-    stackPush(s,2);
-    stackPush(s,3);
-    stackPush(s,5);
-    stackPush(s,2);
+    stack_t *s = newStack();
+    stackPush(s, 1);
+    stackPush(s, 1);
+    stackPush(s, 2);
+    stackPush(s, 3);
+    stackPush(s, 5);
+    stackPush(s, 2);
     stackPrint(s);
 
-    int* arr = stackToArray(s);
+    int *arr = stackToArray(s);
     for (int i = 0; i < s->size; i++)
     {
-        printf("%d\n",arr[i]);
+        printf("%d\n", arr[i]);
     }
 
-    printf("pop %d\n",stackPop(s)); 
-    printf("pop %d\n",stackPop(s)); 
-    printf("pop %d\n",stackPop(s)); 
-    printf("pop %d\n",stackPop(s)); 
-    printf("pop %d\n",stackPop(s)); 
-    printf("pop %d\n",stackPop(s)); 
-    printf("pop %d\n",stackPop(s)); 
-    printf("pop %d\n",stackPop(s)); 
+    printf("pop %d\n", stackPop(s));
+    printf("pop %d\n", stackPop(s));
+    printf("pop %d\n", stackPop(s));
+    printf("pop %d\n", stackPop(s));
+    printf("pop %d\n", stackPop(s));
+    printf("pop %d\n", stackPop(s));
+    printf("pop %d\n", stackPop(s));
+    printf("pop %d\n", stackPop(s));
     stackPrint(s);
 
-    stackPush(s,2);
+    stackPush(s, 2);
     stackPrint(s);
 
     stackDelete(s);
 
-    printf("%d\n",s->end->value);
+    printf("%d\n", s->end->value);
 }
 
-void testQueue(){
-    queue_t* q = newQueue();
+void testQueue()
+{
+    queue_t *q = newQueue();
     queueEnqueue(q, 1);
     queueEnqueue(q, 453);
     queueEnqueue(q, 345);
@@ -232,43 +225,45 @@ void testQueue(){
     queueEnqueue(q, -9242842);
     queuePrint(q);
 
-    printf("dequeue %d\n",queueDequeue(q));
-    printf("dequeue %d\n",queueDequeue(q));
-    printf("dequeue %d\n",queueDequeue(q));
-    printf("dequeue %d\n",queueDequeue(q));
-    printf("dequeue %d\n",queueDequeue(q));
-    printf("dequeue %d\n",queueDequeue(q));
-    printf("dequeue %d\n",queueDequeue(q));
-    printf("dequeue %d\n",queueDequeue(q));
+    printf("dequeue %d\n", queueDequeue(q));
+    printf("dequeue %d\n", queueDequeue(q));
+    printf("dequeue %d\n", queueDequeue(q));
+    printf("dequeue %d\n", queueDequeue(q));
+    printf("dequeue %d\n", queueDequeue(q));
+    printf("dequeue %d\n", queueDequeue(q));
+    printf("dequeue %d\n", queueDequeue(q));
+    printf("dequeue %d\n", queueDequeue(q));
 
-    queuePrint(q); 
+    queuePrint(q);
 
     queueEnqueue(q, 31415);
 
-    int* arr = queueToArray(q);
-    printf("%d\n",arr[0]);
+    int *arr = queueToArray(q);
+    printf("%d\n", arr[0]);
     free(arr);
 
     queueDelete(q);
 }
 
-void testString(){
-    stringList_t* s1 = newString("abc");
-    stringList_t* s2 = newString("123");
-    
+void testString()
+{
+    stringList_t *s1 = newString("abc");
+    stringList_t *s2 = newString("123");
+
     stringConcatenation(s1, s2);
     stringPrint(s1);
     stringPrint(s2);
     stringDelete(s1);
     stringDelete(s2);
 
-    stringList_t* s = newString("abc");
+    stringList_t *s = newString("abc");
     stringPrint(s);
     stringSet(s, "oyasuminasai");
     stringPrint(s);
 }
 
-void testSortTime(){
+void testSortTime()
+{
     int size = 99999999;
     int *vetor1 = (int *)malloc((size) * sizeof(int));
 
@@ -279,7 +274,6 @@ void testSortTime(){
     {
         randomNum = rand();
         vetor1[i] = randomNum;
-
     }
 
     printf("organizando...\n");
@@ -293,34 +287,38 @@ void testSortTime(){
     intevalo = ((double)(end - start)) / CLOCKS_PER_SEC;
     printf("tempo(s)=%f\n", intevalo);
 
-    //printVetor(vetor1,size);
+    // printVetor(vetor1,size);
     printf("verificando... ");
     organized(vetor1, size);
 }
 
-void testSplit(){
-    stringList_t* s = newString("---a----bbbb----c---------");
+void testSplit()
+{
+    stringList_t *s = newString("---a----bbbb----c---------");
     int n = 0;
-    stringList_t** arr = stringSplit(s,'-',&n);
-    printf("n = %d\n",n);
+    stringList_t **arr = stringSplit(s, '-', &n);
+    printf("n = %d\n", n);
     for (int i = 0; i < n; i++)
     {
         stringPrint(arr[i]);
     }
 }
 
-void testStringComp(){
-    printf("%d\n", stringComparation(newString(""),newString("")));
+void testStringComp()
+{
+    printf("%d\n", stringComparation(newString(""), newString("")));
 }
 
-void testStringCopy(){
-    stringList_t* s = newString("abc");
-    stringCopy(newString("delta"),s);
+void testStringCopy()
+{
+    stringList_t *s = newString("abc");
+    stringCopy(newString("delta"), s);
     stringPrint(s);
 }
 
-void testDynamicArray(){
-    dynamicArray_t* arr = newDynamicArray();
+void testDynamicArray()
+{
+    dynamicArray_t *arr = newDynamicArray();
     dynamicArrayAddEnd(arr, 123);
     dynamicArrayAddEnd(arr, 2);
     dynamicArrayAddEnd(arr, 3);
@@ -330,7 +328,7 @@ void testDynamicArray(){
     dynamicArrayAddEnd(arr, 2);
     dynamicArrayAddEnd(arr, 3);
     dynamicArrayAddEnd(arr, 314159265);
-    printf("size max = %d\n",arr->maxSize);
+    printf("size max = %d\n", arr->maxSize);
     dynamicArrayPrint(arr);
 
     printf("%d\n", dynamicArrayRemoveEnd(arr));
@@ -349,9 +347,9 @@ void testDynamicArray(){
 
     for (int i = 0; i < 999; i++)
     {
-        //dynamicArrayAddEnd(arr, i);
+        // dynamicArrayAddEnd(arr, i);
     }
-    
+
     dynamicArrayClear(arr);
     printf("----------------");
     dynamicArrayAddEnd(arr, 3);
@@ -361,28 +359,28 @@ void testDynamicArray(){
     printf("size max = %d\n", arr->maxSize);
     dynamicArrayPrint(arr);
 
-    dynamicArrayAddAtIndex(arr,0,1);
+    dynamicArrayAddAtIndex(arr, 0, 1);
     printf("size max = %d\n", arr->maxSize);
     dynamicArrayPrint(arr);
 
-    dynamicArrayRemoveAtIndex(arr,3);
+    dynamicArrayRemoveAtIndex(arr, 3);
     printf("size max = %d\n", arr->maxSize);
     dynamicArrayPrint(arr);
 
-    dynamicArrayRemoveAtIndex(arr,0);
-    dynamicArrayRemoveAtIndex(arr,0);
-    dynamicArrayRemoveAtIndex(arr,0);
+    dynamicArrayRemoveAtIndex(arr, 0);
+    dynamicArrayRemoveAtIndex(arr, 0);
+    dynamicArrayRemoveAtIndex(arr, 0);
     printf("size max = %d\n", arr->maxSize);
     dynamicArrayPrint(arr);
 
     dynamicArrayClear(arr);
 
-    printf("size max = %d\n",arr->maxSize);
-    printf("array[0] = %d\n",dynamicArrayGet(arr,0));
+    printf("size max = %d\n", arr->maxSize);
+    printf("array[0] = %d\n", dynamicArrayGet(arr, 0));
 
     dynamicArrayDelete(arr);
 
-    //precisa terminar de testar
+    // precisa terminar de testar
 }
 
 /*
@@ -516,24 +514,45 @@ void testTime(){
 }
 */
 
-void testLinkedList(){
-    linkdedListStatus_t status;
-    linkedList_t* list = newLinkedList(&status);
+void testLinkedList()
+{
+    linkedListStatus_t status;
+    linkedList_t *list = newLinkedList(&status);
     if (status != LINKED_LIST_SUCESS)
     {
-        printf("Ocorreu um erro de codigo %d \n", status);
+        printf("Ocorreu um erro na criacao da lista de codigo %d \n", status);
         return;
     }
-    
 
-    linkedListAddEnd(list, 1, NULL);
+    for (size_t i = 0; i < 3; i++)
+    {
+        linkedListAddEnd(list, i, &status);
+        if (status != LINKED_LIST_SUCESS)
+        {
+            printf("Ocorreu um erro de codigo %d \n", status);
+        }
+    }
+
+    linkedListPrint(list);
+
+    for (size_t i = 0; i < 4; i++)
+    {
+        linkedListRemoveEnd(list, &status);
+        if (status != LINKED_LIST_SUCESS)
+        {
+            printf("Ocorreu um erro de codigo %d \n", status);
+        }
+    }
+
+    linkedListDelete(list);
 }
 
-int main(){ 
+int main()
+{
 
-    //testTime();
+    // testTime();
     testLinkedList();
-    
+
     return 0;
 }
 
